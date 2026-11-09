@@ -22,6 +22,7 @@ export const flagSources: Sources = {
     "flags.stale": () => ({ label: "Stale flags (90+ days)", value: listFlags().filter((f) => isStale(f)).length }),
   },
   sources: {
+    "flags.byOwner": () => [...new Set(listFlags().map((f) => f.owner))].map((o) => ({ label: o, value: listFlags().filter((f) => f.owner === o).length })),
     "flags.liveInProd": () =>
       listFlags().filter((f) => f.prod).map((f) => ({ id: f.id, title: f.description, subtitle: `On for ${f.rolloutPct}% of customers · owned by ${f.owner}` })),
     "flags.recentProd": () =>

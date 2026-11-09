@@ -1,7 +1,8 @@
 import type { Sources } from "@/components/widgets/types";
 import { can, rolesFor } from "@/core/permissions";
 import { getUser } from "@/core/users";
-import { formatUsd, listRefunds, refundedToday, type Refund } from "./logic";
+import { getPayment } from "@/adapters/payments";
+import { ANALYST_DAILY_LIMIT_CENTS, formatUsd, listRefunds, refundedToday, type Refund } from "./logic";
 import { PaymentsPanel, refundablePayments } from "./payments-panel";
 import { RequestBar } from "./request-bar";
 import { refundStats } from "./stats";
@@ -34,6 +35,7 @@ export const refundSources: Sources = {
     "refunds.pendingCount": () => ({ label: "Pending approvals", value: refundStats().pendingCount }),
     "refunds.medianApprove": () => ({ label: "Median time to approve", value: `${refundStats().medianApproveHours.toFixed(1)} h` }),
     "refunds.myOpen": ({ user }) => ({ label: "My open refund requests", value: listRefunds().filter((r) => r.requestedBy === user.id && r.status === "pending_approval").length }),
+    "refunds.myToday": ({ user }) => ({ label: "My instant refunds today", value: formatUsd(refundedToday(user)), hint: `of ${formatUsd(ANALYST_DAILY_LIMIT_CENTS)} daily limit` }),
     "refunds.volumeMonth": () => {
       const month = new Date().toISOString().slice(0, 7);
       const done = listRefunds().filter((r) => r.status === "completed" && r.createdAt.startsWith(month));
@@ -44,6 +46,10 @@ export const refundSources: Sources = {
     "refunds.perDay": () => refundStats().perDay,
     "refunds.byReason": () => refundStats().byReason,
     "refunds.byStatus": () => refundStats().byStatus,
+    "refunds.byMethod": () => {
+      const done = listRefunds().filter((r) => r.status === "completed");
+      return ["card", "ach"].map((m) => ({ label: m.toUpperCase(), value: done.filter((r) => getPayment(r.paymentId).method === m).length }));
+    },
     "refunds.monthly": monthly,
     "refunds.myRequests": ({ user }) => requestRows(listRefunds().filter((r) => r.requestedBy === user.id)),
     "refunds.teamRequests": () => requestRows(listRefunds()),

@@ -2,10 +2,12 @@ import { ROLES } from "@/config/roles";
 import { VIEWS } from "@/config/views";
 import type { Widget } from "@/config/views/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { customWidgets } from "@/core/drafts";
 import type { User } from "@/core/users";
 import { METRICS, PANELS, SOURCES } from "@/tools/sources";
 import { ActivityFeed, type FeedItem } from "./activity-feed";
 import { ApprovalList } from "./approval-list";
+import { CustomizedTag } from "./customized-tag";
 import { approvalRows } from "./approval-rows";
 import { BarChart, LineChart } from "./charts";
 import { DataTable } from "./data-table";
@@ -56,8 +58,16 @@ export function RenderView({ tool, user, query }: { tool: string; user: User; qu
     }
   };
 
+  // Widgets added from the "+" builder for this role come first, marked "Customized".
+  const custom = customWidgets(user.role, tool);
   return (
     <div className="grid gap-4 lg:grid-cols-2">
+      {custom.map((c) => (
+        <div key={c.id} className="rounded-xl p-2 ring-2 ring-primary/40 lg:col-span-2">
+          <CustomizedTag id={c.id} label={c.label} request={c.request} />
+          {render(c.widget, -1)}
+        </div>
+      ))}
       {view.widgets.map((w, i) => (
         <div key={i} className={"width" in w && w.width === "half" ? undefined : "lg:col-span-2"}>{render(w, i)}</div>
       ))}

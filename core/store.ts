@@ -52,6 +52,10 @@ export function create<T extends Row>(collection: string, row: T): T {
   return row;
 }
 
+export function remove(collection: string, id: string): void {
+  db().collections[collection] = list(collection).filter((r) => r.id !== id);
+}
+
 export function updateRow<T extends Row>(collection: string, id: string, patch: Partial<T>): T {
   return Object.assign(getRow<T>(collection, id), patch);
 }

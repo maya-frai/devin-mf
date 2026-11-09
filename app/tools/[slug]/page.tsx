@@ -4,7 +4,9 @@ import { Forbidden } from "@/components/forbidden";
 import { PageTitle } from "@/components/page-title";
 import { PlatformView } from "@/components/platform-view";
 import { can } from "@/core/permissions";
+import { DraftToolView } from "@/components/drafts/draft-tool-view";
 import { ImportBanner } from "@/components/import-banner";
+import { getDraft } from "@/core/drafts";
 import { Button } from "@/components/ui/button";
 import { getCurrentUser, getTerms, toolName } from "@/core/session";
 import { importCounts, trackOpen } from "@/core/store";
@@ -16,6 +18,8 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
   const query = (await props.searchParams) as Record<string, string | undefined>;
   const { view } = query;
   const tool = getTool(slug);
+  const draft = tool ? undefined : getDraft(slug);
+  if (draft) return <DraftToolView draft={draft} user={await getCurrentUser()} />;
   if (!tool) notFound();
 
   const user = await getCurrentUser();

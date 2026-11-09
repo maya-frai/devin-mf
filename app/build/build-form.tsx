@@ -5,7 +5,8 @@ import { PromptOutput } from "@/components/prompt-output";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { buildPlan, buildPrompt, type BuildContext, type BuildRequest } from "@/lib/build-prompt";
+import { buildPrompt, type BuildContext, type BuildRequest } from "@/lib/build-prompt";
+import { BuildFlow } from "./build-flow";
 
 type Suggestion = { mode: "new" | "customize"; tool?: string; text: string; name?: string };
 const field = "rounded-lg border bg-background px-3 text-sm font-normal";
@@ -44,7 +45,7 @@ export function BuildForm(props: { ctx: BuildContext; suggestions: Suggestion[];
                 <textarea required rows={3} value={req.request} onChange={(e) => setReq({ ...req, request: e.target.value })}
                   placeholder="In your own words: who uses it, what they do, what needs approval" className={`${field} py-2`} />
               </label>
-              <Button type="submit">Generate plan and Devin prompt</Button>
+              <Button type="submit">Build it</Button>
             </form>
             <div className="space-y-1.5">
               <div className="text-xs text-muted-foreground">Ideas for a {ctx.user.title}</div>
@@ -59,13 +60,13 @@ export function BuildForm(props: { ctx: BuildContext; suggestions: Suggestion[];
           </CardContent>
         </Card>
         {done ? (
-          <Card>
-            <CardHeader><CardTitle>Plan</CardTitle></CardHeader>
-            <CardContent className="space-y-4">
-              <ul className="space-y-1 text-sm">{buildPlan(done, ctx).map((p) => <li key={p} className="font-mono text-xs">• {p}</li>)}</ul>
-              <PromptOutput prompt={buildPrompt(done, ctx)} />
-            </CardContent>
-          </Card>
+          <>
+            <BuildFlow key={JSON.stringify(done)} req={done} ctx={ctx} />
+            <Card>
+              <CardHeader><CardTitle>The Devin prompt for the real PR</CardTitle></CardHeader>
+              <CardContent><PromptOutput prompt={buildPrompt(done, ctx)} /></CardContent>
+            </Card>
+          </>
         ) : null}
       </div>
       <Card className="h-fit lg:col-span-2">

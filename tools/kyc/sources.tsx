@@ -21,6 +21,7 @@ export const kycSources: Sources = {
     "kyc.pastSla": () => ({ label: "Cases past SLA", value: queueMetrics(listCases()).pastSla }),
     "kyc.decidedToday": () => ({ label: "Decided today", value: queueMetrics(listCases()).decidedToday }),
     "kyc.approvalRate": () => ({ label: "Approval rate (7 days)", value: `${Math.round(queueMetrics(listCases()).approvalRate * 100)}%` }),
+    "kyc.docsMissing": () => ({ label: "Open cases missing documents", value: listCases().filter((c) => isOpen(c) && Object.values(c.documents).includes("missing")).length }),
     "kyc.myQueue": ({ user }) => ({ label: "My queue", value: listCases().filter((c) => isOpen(c) && c.assignee === user.id).length }),
     "kyc.myClaimed": ({ user }) => ({ label: "My claimed KYC cases", value: listCases().filter((c) => isOpen(c) && c.assignee === user.id).length }),
   },

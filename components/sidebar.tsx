@@ -2,12 +2,13 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { ROLES } from "@/config/roles";
 import { actionableBy } from "@/core/approvals";
+import { listDrafts } from "@/core/drafts";
 import { can } from "@/core/permissions";
 import { getCurrentBrand, getCurrentUser, getTerms, toolName } from "@/core/session";
 import { TOOLS } from "@/tools/registry";
 import { Badge } from "@/components/ui/badge";
 
-type Item = { href: string; label: string; badge?: number };
+type Item = { href: string; label: string; badge?: number; tag?: string };
 
 // Home, then the tools this role uses day to day, then the settings it cares about.
 // Both lists and their order come from config/roles.ts; labels from config/terminology.ts.
@@ -19,7 +20,8 @@ export async function Sidebar() {
     approvals: { href: "/approvals", label: terms.approvals, badge: actionableBy(user).length },
     audit: can(user, "audit.view") ? { href: "/audit", label: terms.audit } : null,
   };
-  const tools = role.sidebar.tools.map((id) => items[id]).filter((i): i is Item => !!i);
+  const drafts = listDrafts().filter((d) => d.role === user.role).map((d) => ({ href: `/tools/${d.id}`, label: d.spec.name, tag: "Draft" }));
+  const tools = [...role.sidebar.tools.map((id) => items[id]).filter((i): i is Item => !!i), ...drafts];
   const settings = role.sidebar.settings.map((s) => ({ href: `/settings/${s}`, label: terms[s] }));
 
   const item = "flex items-center justify-between rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground";
@@ -28,7 +30,7 @@ export async function Sidebar() {
     <nav className="mb-6 space-y-0.5">
       {entries.map((i) => (
         <Link key={i.href} href={i.href} className={item}>
-          {i.label} {i.badge ? <Badge>{i.badge}</Badge> : null}
+          {i.label} {i.badge ? <Badge>{i.badge}</Badge> : i.tag ? <Badge variant="outline">{i.tag}</Badge> : null}
         </Link>
       ))}
     </nav>

@@ -34,6 +34,7 @@ export const POLICY: Record<string, Role[]> = {
 };
 
 export function can(user: User, action: string): boolean {
+  if (action.startsWith("role:")) return user.role === action.slice(5); // e.g. approvers chosen by a draft tool
   return POLICY[action]?.includes(user.role) ?? false;
 }
 
