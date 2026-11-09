@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { PromptOutput } from "@/components/prompt-output";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { buildPrompt, type BuildContext, type BuildRequest } from "@/lib/build-prompt";
+import type { BuildContext, BuildRequest } from "@/lib/build-prompt";
 import { BuildFlow } from "./build-flow";
 
 type Suggestion = { mode: "new" | "customize"; tool?: string; text: string; name?: string };
@@ -60,13 +59,7 @@ export function BuildForm(props: { ctx: BuildContext; suggestions: Suggestion[];
           </CardContent>
         </Card>
         {done ? (
-          <>
-            <BuildFlow key={JSON.stringify(done)} req={done} ctx={ctx} />
-            <Card>
-              <CardHeader><CardTitle>The Devin prompt for the real PR</CardTitle></CardHeader>
-              <CardContent><PromptOutput prompt={buildPrompt(done, ctx)} /></CardContent>
-            </Card>
-          </>
+          <BuildFlow key={JSON.stringify(done)} req={done} ctx={ctx} />
         ) : null}
       </div>
       <Card className="h-fit lg:col-span-2">

@@ -11,6 +11,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { toggleFlagAction } from "./actions";
 import { FlagDrawer } from "./flag-drawer";
 import { WORKFLOWS } from "@/config/workflows";
+import type { Tweak } from "@/lib/interpret";
 import type { Env, Flag } from "./logic";
 
 const ENVS = WORKFLOWS.flags.environments;
@@ -25,8 +26,10 @@ export type FlagRow = Flag & {
   history: { id: string; at: string; actor: string; action: string; part: string; reason: string; after: string; source?: string }[];
 };
 
-export function FlagsTable({ rows, canToggle, needs }: { rows: FlagRow[]; canToggle: boolean; needs: string }) {
+export function FlagsTable({ rows, canToggle, needs, tweak }: { rows: FlagRow[]; canToggle: boolean; needs: string; tweak?: Tweak }) {
   const t = useTable(rows, { search: ["key", "description", "owner"], status: "prodState", sort: "key", desc: false });
+  // Customizations from the "+" builder: pin a team's flags first, highlight stale ones.
+  const pinned = tweak?.pinOwner ? [...t.rows].sort((a, b) => Number(b.owner === tweak.pinOwner) - Number(a.owner === tweak.pinOwner)) : t.rows;
   const [change, setChange] = useState<{ flag: FlagRow; env: Env; enabled: boolean } | null>(null);
   const [open, setOpen] = useState<string | null>(null);
   const drawerFlag = rows.find((r) => r.id === open) ?? null;
@@ -55,8 +58,8 @@ export function FlagsTable({ rows, canToggle, needs }: { rows: FlagRow[]; canTog
         <TableBody>
           {t.rows.length === 0 ? (
             <TableRow><TableCell colSpan={6} className="pl-4 text-muted-foreground">No flags match. Clear the search or status filter.</TableCell></TableRow>
-          ) : t.rows.map((f) => (
-            <TableRow key={f.id}>
+          ) : pinned.map((f) => (
+            <TableRow key={f.id} className={tweak?.highlightStale && f.stale ? "bg-warning/10" : undefined}>
               <TableCell className="pl-4">
                 <button type="button" onClick={() => setOpen(f.id)} className="font-mono text-xs underline">{f.key}</button>
                 {f.stale ? <Badge variant="outline" className="ml-2">stale</Badge> : null}

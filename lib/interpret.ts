@@ -13,7 +13,8 @@ export type DraftSpec = {
   money: boolean;
   request: string;
 };
-export type Customization = { tool: string; widget: Widget; label: string; matched: boolean };
+export type Tweak = { pinOwner?: string; highlightStale?: boolean };
+export type Customization = { tool: string; widget?: Widget; tweak?: Tweak; label: string; matched: boolean };
 
 const CATALOG: { tool: string; match: RegExp; label: string; widget: Widget }[] = [
   { tool: "refunds", match: /limit|used today|today/i, label: "KPI: my instant refunds today vs. daily limit", widget: { type: "KpiTiles", metrics: ["refunds.myToday"] } },
@@ -31,6 +32,13 @@ const CATALOG: { tool: string; match: RegExp; label: string; widget: Widget }[] 
 ];
 
 export function interpretCustomize(tool: string, request: string): Customization {
+  // Changes to the flags table itself: pin a team's flags first, highlight stale ones.
+  if (tool === "flags" && /sort|first|pin|highlight/i.test(request)) {
+    const pinOwner = request.match(/(\w+)\s+team/i)?.[1]?.toLowerCase();
+    const highlightStale = /stale|highlight/i.test(request);
+    const parts = [pinOwner ? `${pinOwner} team's flags first` : "", highlightStale ? "stale flags highlighted" : ""].filter(Boolean);
+    return { tool, tweak: { pinOwner, highlightStale }, label: `Flags table: ${parts.join(", ")}`, matched: true };
+  }
   const options = CATALOG.filter((c) => c.tool === tool);
   const hit = options.find((c) => c.match.test(request));
   const pick = hit ?? options[0];

@@ -2,6 +2,7 @@ import { listApprovals } from "@/core/approvals";
 import { auditFor } from "@/core/audit";
 import { can, rolesFor } from "@/core/permissions";
 import type { ViewContext } from "@/components/widgets/types";
+import { customWidgets } from "@/core/drafts";
 import { getUser } from "@/core/users";
 import { FlagsTable, type FlagRow } from "./flags-table";
 import { isStale, listFlags } from "./logic";
@@ -23,5 +24,6 @@ export function FlagsPanel({ ctx: { user } }: { ctx: ViewContext }) {
     };
   });
 
-  return <FlagsTable rows={rows} canToggle={can(user, "flags.toggle")} needs={rolesFor("flags.toggle")} />;
+  const tweak = customWidgets(user.role, "flags").find((c) => c.tweak)?.tweak;
+  return <FlagsTable rows={rows} canToggle={can(user, "flags.toggle")} needs={rolesFor("flags.toggle")} tweak={tweak} />;
 }

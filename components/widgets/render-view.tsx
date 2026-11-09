@@ -65,7 +65,7 @@ export function RenderView({ tool, user, query }: { tool: string; user: User; qu
       {custom.map((c) => (
         <div key={c.id} className="rounded-xl p-2 ring-2 ring-primary/40 lg:col-span-2">
           <CustomizedTag id={c.id} label={c.label} request={c.request} />
-          {render(c.widget, -1)}
+          {c.widget ? render(c.widget, -1) : null}
         </div>
       ))}
       {view.widgets.map((w, i) => (

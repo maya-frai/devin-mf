@@ -1,5 +1,5 @@
 import type { Widget } from "@/config/views/types";
-import { pastTense, type Customization, type DraftSpec } from "@/lib/interpret";
+import { pastTense, type Customization, type DraftSpec, type Tweak } from "@/lib/interpret";
 import { requestApproval } from "./approvals";
 import { logAudit } from "./audit";
 import { create, get, getRow, list, remove, updateRow, type Row } from "./store";
@@ -10,7 +10,7 @@ import { USERS, type Role, type User } from "./users";
 // other data and audited. Devin turns them into real code through the generated prompt and a PR.
 export type DraftTool = Row & { spec: DraftSpec; role: Role; createdBy: string; createdAt: string };
 export type DraftRow = Row & { subject: string; amountCents: number; status: string; owner: string; createdAt: string };
-export type CustomWidget = Row & { role: Role; tool: string; widget: Widget; label: string; request: string; createdBy: string };
+export type CustomWidget = Row & { role: Role; tool: string; widget?: Widget; tweak?: Tweak; label: string; request: string; createdBy: string };
 
 const NAMES = ["Harper Quinn", "Mateo Silva", "Zoe Laurent", "Arjun Mehta", "Chloe Dubois", "Noah Fischer", "Amara Eze", "Liam Byrne"];
 export const listDrafts = () => list<DraftTool>("draft_tools");
@@ -34,7 +34,7 @@ export function createDraft(user: User, spec: DraftSpec): string {
 }
 
 export function addCustomization(user: User, c: Customization, request: string) {
-  const row = create<CustomWidget>("custom_widgets", { id: `cw_${Date.now().toString(36)}`, role: user.role, tool: c.tool, widget: c.widget, label: c.label, request, createdBy: user.id });
+  const row = create<CustomWidget>("custom_widgets", { id: `cw_${Date.now().toString(36)}`, role: user.role, tool: c.tool, widget: c.widget, tweak: c.tweak, label: c.label, request, createdBy: user.id });
   logAudit({ actor: user, tool: "platform", action: "tool.customized", entityId: `config/views/${c.tool}`, after: { role: user.role, widget: c.label }, reason: request });
   return row;
 }
