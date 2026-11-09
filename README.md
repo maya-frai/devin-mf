@@ -36,7 +36,7 @@ Switch user in the header. Each role lands on its own page and sees its own view
 | ----- | -------------- | ----------------------------------------------------------------------------- |
 | Ana   | `ops_analyst`  | Business operations: refunds (request first) and the KYC queue, Reveal SSN/DOB (audited) |
 | Luis  | `ops_lead`     | Approvals first; refunds, KYC team view (+ auditor CSV), plain-language flags; second KYC reviewer |
-| Priya | `product_manager` | Flags in plain English, refund trends and KYC status (read-only, no PII)   |
+| Priya | `product_manager` | Feature flags (plain English), launch Roadmap, refund trends; no KYC/PII   |
 | Eli   | `eng_admin`    | Full flags view, brand switcher, Customize page, New tool                     |
 | Farah | `finance`      | Finance analyst: refunds dashboard (read-only), ledger adjustments, audit log |
 

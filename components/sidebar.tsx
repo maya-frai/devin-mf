@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { ROLES } from "@/config/roles";
 import { actionableBy } from "@/core/approvals";
-import { listDrafts } from "@/core/drafts";
+import { listDrafts, usesDraft } from "@/core/drafts";
 import { can } from "@/core/permissions";
 import { getCurrentBrand, getCurrentUser, getTerms, toolName } from "@/core/session";
 import { USERS } from "@/core/users";
@@ -17,9 +17,11 @@ export async function Sidebar() {
   const items: Record<string, NavItem | null> = {
     ...Object.fromEntries(TOOLS.map((t) => [t.manifest.slug, can(user, `${t.manifest.slug}.view`) ? { href: `/tools/${t.manifest.slug}`, label: toolName(terms, t.manifest.slug, t.manifest.name), icon: t.manifest.slug } : null])),
     approvals: { href: "/approvals", label: terms.approvals, icon: "approvals", badge: actionableBy(user).length },
+    roadmap: { href: "/roadmap", label: terms.roadmap, icon: "roadmap" },
     audit: can(user, "audit.view") ? { href: "/audit", label: terms.audit, icon: "audit" } : null,
   };
-  const drafts: NavItem[] = listDrafts().filter((d) => d.role === user.role).map((d) => ({ href: `/tools/${d.id}`, label: d.spec.name, icon: "draft", tag: "Draft" }));
+  const TAG = { draft: "Draft", pilot: "Pilot", in_review: "Review", published: undefined };
+  const drafts: NavItem[] = listDrafts().filter((d) => usesDraft(user, d)).map((d) => ({ href: `/tools/${d.id}`, label: d.spec.name, icon: "draft", tag: TAG[d.status] }));
   const tools = [...role.sidebar.tools.map((id) => items[id]).filter((i): i is NavItem => !!i), ...drafts];
   const settings: NavItem[] = [
     { href: "/settings", label: "Overview", icon: "overview", exact: true },

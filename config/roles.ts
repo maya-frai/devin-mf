@@ -60,8 +60,8 @@ export const ROLES: Record<Role, RoleConfig> = {
     team: "Product",
     landing: "/",
     home: { kpis: ["flags.onInProd", "flags.pendingProd", "refunds.rate"], attention: [{ source: "flags.liveInProd", title: "Live for customers" }] },
-    sidebar: { tools: ["flags", "refunds", "kyc"], settings: ["data", "access", "compliance"] },
-    tools: { flags: { view: "flags/lead" }, refunds: { view: "refunds/finance" }, kyc: { view: "kyc/analyst" } },
+    sidebar: { tools: ["flags", "roadmap", "refunds"], settings: ["data", "access", "compliance"] },
+    tools: { flags: { view: "flags/lead" }, refunds: { view: "refunds/finance" } }, // no KYC: customer PII stays with ops and compliance
     suggestions: [
       { mode: "customize", tool: "refunds", text: "Add refunds by reason so I can spot product issues" },
       { mode: "customize", tool: "flags", text: "Show what's turned on for customers in prod" },

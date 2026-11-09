@@ -8,7 +8,8 @@ import type { WorkItem } from "@/components/widgets/work-queue";
 import { KpiTiles } from "@/components/widgets/kpi-tile";
 import { ROLES } from "@/config/roles";
 import { actionableBy, listApprovals } from "@/core/approvals";
-import { listDrafts } from "@/core/drafts";
+import { listDrafts, usage, usesDraft } from "@/core/drafts";
+import { AdoptButton } from "@/components/drafts/adopt-buttons";
 import { can } from "@/core/permissions";
 import { getCurrentUser, getTerms, toolName } from "@/core/session";
 import { USERS } from "@/core/users";
@@ -29,7 +30,8 @@ export default async function Home() {
   const mine = listApprovals().filter((a) => a.status === "pending" && a.requestedBy === user.id);
   const lists = role.home.attention.map((a) => ({ ...a, items: (SOURCES[a.source](ctx) as WorkItem[]).slice(0, 3) })).filter((l) => l.items.length);
   const tools = role.sidebar.tools.filter((s) => TOOLS.some((t) => t.manifest.slug === s) && can(user, `${s}.view`));
-  const drafts = listDrafts().filter((d) => d.role === user.role);
+  const drafts = listDrafts().filter((d) => usesDraft(user, d));
+  const fromTeam = listDrafts().filter((d) => d.role === user.role && !usesDraft(user, d));
   const hour = new Date().getHours();
   const caughtUp = !waiting.length && !mine.length && !lists.length;
 
@@ -76,6 +78,37 @@ export default async function Home() {
           </CardContent>
         </Card>
       </div>
+      {fromTeam.length ? (
+        <section>
+          <h2 className="mb-1 text-lg font-semibold">New from your team</h2>
+          <p className="mb-3 text-sm text-muted-foreground">Tools teammates in your role built with Devin. Adopt one to add it to your tools; once enough people use it, it gets reviewed and published for everyone.</p>
+          <div className="grid gap-4 lg:grid-cols-2">
+            {fromTeam.map((d) => {
+              const u = usage(d);
+              return (
+                <Card key={d.id} className="border-primary/30">
+                  <CardContent className="space-y-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div><div className="font-medium">{d.spec.name}</div><div className="text-xs text-muted-foreground">Built by {who(d.createdBy)} · {d.status === "draft" ? "Draft" : "Pilot"}</div></div>
+                      <Sparkles className="size-4 text-primary" />
+                    </div>
+                    <p className="line-clamp-2 text-sm text-muted-foreground">“{d.spec.request}”</p>
+                    <div className="flex gap-4 text-xs text-muted-foreground">
+                      <span><b className="text-foreground">{u.users}</b> of {u.teammates} {d.role} using it</span>
+                      <span><b className="text-foreground">{u.actions}</b> actions</span>
+                      <span><b className="text-foreground">{u.opens}</b> opens</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <AdoptButton slug={d.id} />
+                      <Button size="sm" variant="outline" nativeButton={false} render={<Link href={`/tools/${d.id}`} />}>Preview</Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
       <section>
         <h2 className="mb-3 text-lg font-semibold">Your tools</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -99,7 +132,7 @@ export default async function Home() {
             );
           })}
           {drafts.map((d) => (
-            <Link key={d.id} href={`/tools/${d.id}`}><Card className="h-full border-dashed"><CardContent className="space-y-1"><div className="text-xs uppercase text-muted-foreground">Draft</div><div className="font-medium">{d.spec.name}</div><div className="line-clamp-2 text-sm text-muted-foreground">{d.spec.request}</div></CardContent></Card></Link>
+            <Link key={d.id} href={`/tools/${d.id}`}><Card className="h-full border-dashed"><CardContent className="space-y-1"><div className="text-xs uppercase text-muted-foreground">{d.status === "published" ? "Published" : d.status === "in_review" ? "In review" : d.status === "pilot" ? `Pilot · ${usage(d).users} people` : "Draft · only you"}</div><div className="font-medium">{d.spec.name}</div><div className="line-clamp-2 text-sm text-muted-foreground">{d.spec.request}</div></CardContent></Card></Link>
           ))}
         </div>
       </section>

@@ -23,6 +23,12 @@ export const WORKFLOWS = {
     approvalLimitCents: 100_000, // $1,000
     approverRole: "ops_lead" as Role,
   },
+  // A tool built from the "+" builder becomes permanent for its role once enough people use it.
+  adoption: {
+    minAdopters: 2, // the builder plus at least one teammate
+    minActions: 3, // real actions taken in the tool
+    publishApproverRole: "eng_admin" as Role, // reviews the PR that makes it permanent
+  },
   // Power Apps security roles -> app roles, used when importing Dataverse history.
   powerAppsRoles: {
     "Ops Analyst - Refunds": "ops_analyst",

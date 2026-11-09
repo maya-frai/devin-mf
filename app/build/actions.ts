@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { addCustomization, createDraft, draftAct, removeCustomization } from "@/core/drafts";
+import { addCustomization, adoptDraft, createDraft, draftAct, removeCustomization, requestPublish } from "@/core/drafts";
 import { guarded } from "@/core/guard";
 import { can } from "@/core/permissions";
 import { getCurrentUser } from "@/core/session";
@@ -36,4 +36,12 @@ export async function undoCustomizationAction(id: string) {
 
 export async function draftActAction(slug: string, rowId: string, verb: string, reason: string) {
   return guarded("tools.create", (user) => draftAct(user, slug, rowId, verb, reason));
+}
+
+export async function adoptDraftAction(slug: string) {
+  return guarded("tools.create", (user) => adoptDraft(user, slug));
+}
+
+export async function requestPublishAction(slug: string) {
+  return guarded("tools.create", (user) => requestPublish(user, slug));
 }
