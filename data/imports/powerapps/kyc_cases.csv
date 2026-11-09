@@ -1,0 +1,26 @@
+cr4f2_casenumber,cr4f2_applicantname,address1_country,cr4f2_ssn,birthdate,cr4f2_riskscore,cr4f2_riskfactors,cr4f2_doc_id,cr4f2_doc_selfie,cr4f2_doc_address,cr4f2_watchlisthits,statuscode,ownerid,createdon,cr4f2_decidedon,cr4f2_decidedby
+kyc_2001,Noah Fischer,NG,986-79-1697,1987-01-17,32,Address mismatch:37|VPN detected:29|Name on watchlist:19,passed,passed,passed,,1,Ana,2026-11-09T04:00:00Z,,
+kyc_2002,Mia Kowalski,AE,924-39-4062,1996-03-27,89,New device:30|Address mismatch:13|Adverse media:8,passed,passed,passed,EU Sanctions;Mia Cole;0.84,1,Ana,2026-11-09T14:00:00Z,,
+kyc_2003,Lucas Romero,NG,935-72-5581,1996-04-03,46,Adverse media:39|Sign-up velocity:18|New device:5,passed,failed,passed,,1,Ana,2026-11-08T10:00:00Z,,
+kyc_2004,Emma Novak,IN,938-46-2923,1981-03-20,75,Document mismatch:26|Sign-up velocity:11|High-risk country:7,passed,missing,failed,PEP database;Emma Mehta;0.9,1,Ana,2026-11-08T13:00:00Z,,
+kyc_2005,Omar Saleh,IN,999-50-5563,1997-10-07,41,Sign-up velocity:32|New device:29|Adverse media:5,passed,passed,passed,,1,,2026-11-09T10:00:00Z,,
+kyc_2006,Lily Chen,TR,936-56-6083,1981-04-05,18,Sign-up velocity:17|Name on watchlist:9|Document mismatch:5,passed,passed,passed,,1,,2026-11-07T08:00:00Z,,
+kyc_2007,Jack Murphy,SG,925-46-3018,1973-02-22,57,High-risk country:36|Sign-up velocity:31|Adverse media:20,passed,passed,passed,,1,,2026-11-07T15:00:00Z,,
+kyc_2008,Diego Alvarez,FR,944-47-1207,1998-10-08,54,High-risk country:33|Sign-up velocity:26|New device:23,passed,passed,passed,,1,,2026-11-08T18:00:00Z,,
+kyc_2009,Grace Kim,US,957-13-6633,1956-11-21,5,High-risk country:28|Name on watchlist:18|New device:10,passed,passed,passed,,1,,2026-11-08T11:00:00Z,,
+kyc_2010,Marco Bianchi,US,918-69-7574,1996-04-17,70,VPN detected:39|Name on watchlist:19|Address mismatch:12,passed,missing,missing,EU Sanctions;Marco Okafor;0.88,1,,2026-11-08T22:00:00Z,,
+kyc_2011,Freya Larsen,AE,929-12-7077,1978-01-04,18,Document mismatch:35|Adverse media:32|Sign-up velocity:12,passed,passed,passed,,1,,2026-11-07T02:00:00Z,,
+kyc_2012,Owen Hughes,MX,975-49-5816,1977-04-08,97,High-risk country:20|Name on watchlist:13|Adverse media:10,failed,passed,missing,,1,,2026-11-06T23:00:00Z,,
+kyc_2013,Grace Petrov,SG,988-25-7772,1955-04-05,31,High-risk country:38|Document mismatch:31|Name on watchlist:16,passed,passed,passed,,1,,2026-11-07T10:00:00Z,,
+kyc_2014,Marco Okafor,NL,943-78-2830,1997-07-11,64,Name on watchlist:31|PEP match:24|New device:10,passed,passed,passed,,1,,2026-11-07T00:00:00Z,,
+kyc_2015,Felix Cole,AE,959-55-8053,1976-08-04,36,Adverse media:32|Name on watchlist:28|High-risk country:10,failed,passed,passed,,100000001,,2026-11-07T03:00:00Z,,
+kyc_2016,Priya Petrov,IN,971-39-9517,2002-09-16,8,New device:28|High-risk country:25|Sign-up velocity:7,passed,passed,passed,,100000001,,2026-11-08T23:00:00Z,,
+kyc_2017,Aisha Dubois,AE,925-76-6647,1958-02-07,91,Sign-up velocity:25|Adverse media:16|High-risk country:8,passed,passed,missing,OFAC SDN;Aisha Quinn;0.88,100000002,Ana,2026-11-09T18:00:00Z,,
+kyc_2018,Owen Silva,AE,916-60-2372,1990-03-11,77,Sign-up velocity:23|PEP match:14|Document mismatch:8,passed,missing,failed,EU Sanctions;Owen Torres;0.88,100000003,Ana,2026-11-04T16:00:00Z,2026-11-04T21:00:00Z,Ana
+kyc_2019,Ava Khan,NG,967-96-8157,1962-08-11,86,High-risk country:33|Document mismatch:13|VPN detected:10,passed,passed,passed,,100000003,Ana,2026-11-08T14:00:00Z,2026-11-04T21:00:00Z,Ana
+kyc_2020,Noah Kim,DE,925-29-5489,1985-07-02,91,High-risk country:39|New device:31|PEP match:25,passed,passed,passed,,100000003,Ana,2026-11-07T11:00:00Z,2026-11-07T19:00:00Z,Ana
+kyc_2021,Nora Chen,IN,930-93-6730,1979-10-26,52,High-risk country:25|Document mismatch:17|VPN detected:5,passed,passed,passed,,100000003,Ana,2026-11-04T00:00:00Z,2026-11-06T13:00:00Z,Ana
+kyc_2022,Chloe Torres,GB,942-58-4985,2000-04-14,98,Adverse media:31|Sign-up velocity:21|Address mismatch:7,passed,passed,passed,UN Consolidated;Chloe Okafor;0.89,100000003,Ana,2026-11-03T17:00:00Z,2026-11-06T13:00:00Z,Ana
+kyc_2023,Elsa Dubois,IN,972-29-8318,2003-06-26,75,Document mismatch:36|PEP match:27|Sign-up velocity:15,passed,passed,passed,OFAC SDN;Elsa Novak;0.76,100000004,Ana,2026-11-03T19:00:00Z,2026-11-08T15:00:00Z,Ana
+kyc_2024,Elsa Shah,IN,923-47-5337,1962-04-12,11,Document mismatch:28|New device:25|Adverse media:15,failed,passed,passed,,100000004,Ana,2026-11-06T12:00:00Z,2026-11-09T20:00:00Z,Ana
+kyc_2025,Omar Martin,DE,988-21-9909,2001-03-18,88,Name on watchlist:39|Document mismatch:29|VPN detected:15,passed,passed,passed,UN Consolidated;Omar Haddad;0.83,100000004,Ana,2026-11-05T12:00:00Z,2026-11-04T21:00:00Z,Ana

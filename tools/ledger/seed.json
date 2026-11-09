@@ -1,0 +1,107 @@
+[
+  {
+    "id": "acct_3001",
+    "name": "Harbor Coffee LLC",
+    "type": "merchant",
+    "currency": "USD",
+    "balanceCents": 1843250
+  },
+  {
+    "id": "acct_3002",
+    "name": "Northwind Supplies",
+    "type": "merchant",
+    "currency": "USD",
+    "balanceCents": 9120075
+  },
+  {
+    "id": "acct_3003",
+    "name": "Bluebird Florists",
+    "type": "merchant",
+    "currency": "USD",
+    "balanceCents": 254300
+  },
+  {
+    "id": "acct_3004",
+    "name": "Atlas Fitness Co",
+    "type": "merchant",
+    "currency": "USD",
+    "balanceCents": 4410000
+  },
+  {
+    "id": "acct_3005",
+    "name": "Pixel & Pine Studio",
+    "type": "merchant",
+    "currency": "USD",
+    "balanceCents": 78950
+  },
+  {
+    "id": "acct_3006",
+    "name": "Quinn Harper",
+    "type": "customer",
+    "currency": "USD",
+    "balanceCents": 120344
+  },
+  {
+    "id": "acct_3007",
+    "name": "Mateo Silva",
+    "type": "customer",
+    "currency": "USD",
+    "balanceCents": 5600
+  },
+  {
+    "id": "acct_3008",
+    "name": "Zoe Laurent",
+    "type": "customer",
+    "currency": "USD",
+    "balanceCents": 889012
+  },
+  {
+    "id": "acct_3009",
+    "name": "Arjun Mehta",
+    "type": "customer",
+    "currency": "USD",
+    "balanceCents": 43210
+  },
+  {
+    "id": "acct_3010",
+    "name": "Chloe Dubois",
+    "type": "customer",
+    "currency": "USD",
+    "balanceCents": 1500000
+  },
+  {
+    "id": "acct_3011",
+    "name": "Riverbend Dental",
+    "type": "merchant",
+    "currency": "USD",
+    "balanceCents": 2675500
+  },
+  {
+    "id": "acct_3012",
+    "name": "Summit Outdoor Gear",
+    "type": "merchant",
+    "currency": "USD",
+    "balanceCents": 12004500
+  },
+  {
+    "id": "acct_3013",
+    "name": "Noah Fischer",
+    "type": "customer",
+    "currency": "USD",
+    "balanceCents": 310000
+  },
+  {
+    "id": "acct_3014",
+    "name": "Amara Eze",
+    "type": "customer",
+    "currency": "USD",
+    "balanceCents": 99
+  },
+  {
+    "id": "acct_3015",
+    "name": "Operating Float",
+    "type": "internal",
+    "currency": "USD",
+    "balanceCents": 50000000
+  }
+]

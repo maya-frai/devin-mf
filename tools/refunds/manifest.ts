@@ -1,0 +1,14 @@
+import type { ToolManifest } from "@/core/types";
+
+export const manifest: ToolManifest = {
+  slug: "refunds",
+  name: "Refunds",
+  description: "Refunds dashboard: KPIs, trends and payments. Over $500, or over $2,000 a day per analyst, needs an ops lead's approval.",
+  replaces: "Refunds dashboard (Power Apps)",
+  uses: [
+    { capability: "Roles", detail: "refunds.view, refunds.request, refunds.approve", file: "core/permissions.ts" },
+    { capability: "Audit", detail: "refunds.requested, refunds.issued, refunds.rejected (before/after + reason)", file: "tools/refunds/logic.ts" },
+    { capability: "Approvals", detail: "Refunds over $500 or past $2,000/day per analyst (approver ≠ requester)", file: "core/approvals.ts" },
+    { capability: "Adapter", detail: "Mock payments: refundPayment with an idempotency key", file: "adapters/payments.ts" },
+  ],
+};

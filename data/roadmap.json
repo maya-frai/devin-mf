@@ -1,0 +1,145 @@
+[
+  {
+    "name": "Chargeback and dispute manager",
+    "problem": "Disputes are tracked in spreadsheets, so evidence deadlines get missed and fees pile up.",
+    "users": "Ops analysts; ops leads approve",
+    "does": "Review disputes, attach evidence, accept or contest",
+    "sensitive": "Accepting a dispute (refunds money) needs ops lead approval",
+    "capabilities": [
+      "Roles",
+      "Audit",
+      "Approvals",
+      "Adapter",
+      "Money movement"
+    ],
+    "roles": [
+      "ops_analyst",
+      "ops_lead",
+      "finance"
+    ]
+  },
+  {
+    "name": "AML alert triage",
+    "problem": "Transaction monitoring alerts land in one inbox with no prioritisation or decision trail.",
+    "users": "AML analysts; compliance leads approve",
+    "does": "Triage alerts by risk, close as false positive or escalate with a reason",
+    "sensitive": "Escalating to a SAR filing needs compliance lead approval",
+    "capabilities": [
+      "Roles",
+      "Audit",
+      "Approvals",
+      "PII masking",
+      "Adapter"
+    ],
+    "roles": [
+      "ops_analyst",
+      "ops_lead"
+    ]
+  },
+  {
+    "name": "Sanctions hit review",
+    "problem": "Screening near-matches are cleared by email, so there is no auditable record of who cleared them.",
+    "users": "KYC reviewers; compliance leads approve",
+    "does": "Compare the customer against the watchlist entry and clear or confirm the hit",
+    "sensitive": "Clearing a hit needs a second reviewer",
+    "capabilities": [
+      "Roles",
+      "Audit",
+      "Approvals",
+      "PII masking",
+      "Adapter"
+    ],
+    "roles": [
+      "ops_analyst",
+      "ops_lead"
+    ]
+  },
+  {
+    "name": "Customer 360 lookup",
+    "problem": "Support agents juggle five systems to answer one customer question.",
+    "users": "Support agents and ops analysts",
+    "does": "Search a customer and see profile, payments, KYC status and tickets in one view",
+    "sensitive": "Viewing SSN or DOB is masked and audited",
+    "capabilities": [
+      "Roles",
+      "Audit",
+      "PII masking",
+      "Adapter"
+    ],
+    "roles": [
+      "ops_analyst",
+      "ops_lead"
+    ]
+  },
+  {
+    "name": "Payout reconciliation",
+    "problem": "Finance matches bank files to payouts by hand at month end.",
+    "users": "Finance analysts; finance leads approve",
+    "does": "Match payouts to bank statement lines and flag breaks",
+    "sensitive": "Writing off a break needs finance lead approval",
+    "capabilities": [
+      "Roles",
+      "Audit",
+      "Approvals",
+      "Adapter",
+      "Money movement"
+    ],
+    "roles": [
+      "finance",
+      "ops_lead"
+    ]
+  },
+  {
+    "name": "Merchant onboarding review",
+    "problem": "New merchant applications wait days because the reviewers share a queue.",
+    "users": "Risk reviewers; risk leads approve",
+    "does": "Review merchant applications, request documents, approve or decline",
+    "sensitive": "Approving high-risk merchants needs risk lead approval",
+    "capabilities": [
+      "Roles",
+      "Audit",
+      "Approvals",
+      "PII masking",
+      "Adapter"
+    ],
+    "roles": [
+      "ops_analyst",
+      "ops_lead",
+      "product_manager"
+    ]
+  },
+  {
+    "name": "Internal access requests",
+    "problem": "Access to production systems is granted over chat, which leaves no audit trail.",
+    "users": "Any employee requests; system owners approve",
+    "does": "Request access to a system with a reason and an expiry",
+    "sensitive": "Every grant needs the system owner's approval",
+    "capabilities": [
+      "Roles",
+      "Audit",
+      "Approvals"
+    ],
+    "roles": [
+      "eng_admin",
+      "product_manager"
+    ]
+  },
+  {
+    "name": "Manual ledger adjustment",
+    "problem": "Balance corrections are made with direct database edits.",
+    "users": "Ops analysts; ops leads approve",
+    "does": "Debit or credit an account with a reason",
+    "sensitive": "Adjustments above $1,000 need ops lead approval",
+    "capabilities": [
+      "Roles",
+      "Audit",
+      "Approvals",
+      "Money movement"
+    ],
+    "roles": [
+      "ops_analyst",
+      "ops_lead",
+      "finance"
+    ]
+  }
+]
