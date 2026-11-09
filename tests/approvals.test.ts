@@ -9,10 +9,10 @@ const luis = getUser("luis")!;
 beforeEach(resetStore);
 
 test("self-approval is blocked", async () => {
-  const result = await requestRefund(luis, "pay_1003", "Customer request"); // $899.00
+  const result = await requestRefund(luis, { paymentId: "pay_1003", reason: "Customer request" }); // $899.00
   expect(result.status).toBe("pending_approval");
   if (result.status !== "pending_approval") return;
 
-  expect(() => approve(luis, result.approvalId)).toThrow("You can't approve your own request");
+  expect(() => approve(luis, result.approvalId, "Looks fine")).toThrow("You can't approve your own request");
   expect(listApprovals()[0].status).toBe("pending");
 });

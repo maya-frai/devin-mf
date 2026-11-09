@@ -1,72 +1,57 @@
 import Link from "next/link";
 import { PageTitle } from "@/components/page-title";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { codeUrl } from "@/lib/repo";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { KpiTiles } from "@/components/widgets/kpi-tile";
+import { ROLES } from "@/config/roles";
+import { actionableBy } from "@/core/approvals";
+import { can } from "@/core/permissions";
+import { getCurrentUser, getTerms, toolName } from "@/core/session";
+import { recentFor } from "@/core/store";
 import { TOOLS } from "@/tools/registry";
+import { METRICS } from "@/tools/sources";
 
-const MAPPING = [
-  ["Power Apps builder", "Devin builds each tool from a plain-English request", "docs/ADD_TOOL.md"],
-  ["Dataverse", "In-memory store seeded from JSON, with a Reset button", "core/store.ts"],
-  ["Security roles / sign-in", "Role switcher + can(user, action)", "core/permissions.ts"],
-  ["Dataverse auditing", "logAudit() + Audit Log page", "core/audit.ts"],
-  ["Power Automate approvals", "requestApproval() / approve() + Approvals inbox", "core/approvals.ts"],
-  ["Connectors", "Small mock adapters (payments, KYC vendor)", "adapters/payments.ts"],
-  ["Governance / admin center", "Repo conventions + the ADD_TOOL playbook", "AGENTS.md"],
-];
+const CORE_APPS = ["refunds", "kyc", "flags"];
 
-export default function Home() {
+export default async function Home() {
+  const [user, terms] = await Promise.all([getCurrentUser(), getTerms()]);
+  const apps = TOOLS.filter((t) => can(user, `${t.manifest.slug}.view`));
+  const bySlug = (slug: string) => apps.find((t) => t.manifest.slug === slug);
+  const recent = recentFor(user.id).map(bySlug).filter((t) => !!t);
+  const shortcuts = recent.length ? recent : CORE_APPS.map(bySlug).filter((t) => !!t);
+  const kpis = ROLES[user.role].home.kpis.map((m) => METRICS[m]({ user, query: {}, filters: {} }));
+  const waiting = actionableBy(user).length;
+  const hour = new Date().getHours();
+
+  const appCard = (t: (typeof TOOLS)[number]) => (
+    <Link key={t.manifest.slug} href={`/tools/${t.manifest.slug}`}>
+      <Card className="h-full transition-colors hover:bg-accent">
+        <CardHeader>
+          <CardTitle>{toolName(terms, t.manifest.slug, t.manifest.name)}</CardTitle>
+          <CardDescription>{t.manifest.description}</CardDescription>
+        </CardHeader>
+      </Card>
+    </Link>
+  );
+
   return (
     <div className="space-y-8">
-      <PageTitle
-        title="Your internal tool platform, replaced"
-        subtitle="A small shared core in your own repo. Devin builds each tool from a plain-English request."
-      />
-
-      <Card className="py-0">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="pl-4">Power Apps capability</TableHead>
-              <TableHead>Here</TableHead>
-              <TableHead>Code</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {MAPPING.map(([platform, here, file]) => (
-              <TableRow key={platform}>
-                <TableCell className="pl-4 font-medium">{platform}</TableCell>
-                <TableCell>{here}</TableCell>
-                <TableCell>
-                  <a href={codeUrl(file)} target="_blank" rel="noreferrer" className="font-mono text-xs underline">
-                    {file}
-                  </a>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Card>
-
+      <PageTitle title={`Good ${hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening"}, ${user.name}`} subtitle={`You're signed in as ${user.role}.`} user={user} />
+      <KpiTiles metrics={kpis} />
       <section>
-        <h2 className="mb-3 text-lg font-semibold">Tools built by Devin</h2>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {TOOLS.map(({ manifest, build }) => (
-            <Link key={manifest.slug} href={`/tools/${manifest.slug}`}>
-              <Card className="h-full transition-colors hover:bg-muted/50">
-                <CardHeader>
-                  <CardTitle>{manifest.name}</CardTitle>
-                  <CardDescription>{manifest.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="mt-auto flex items-center justify-between">
-                  <Badge variant="secondary">Built in {build.minutes} min</Badge>
-                  <span className="text-xs text-muted-foreground">{manifest.replaces}</span>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
+        <h2 className="mb-3 text-lg font-semibold">{terms.recentApps}</h2>
+        <div className="grid gap-4 sm:grid-cols-3">{shortcuts.map(appCard)}</div>
+      </section>
+      <Link href="/approvals" className="block">
+        <Card className="transition-colors hover:bg-accent">
+          <CardHeader>
+            <CardTitle>{terms.waitingOnYou}: {waiting}</CardTitle>
+            <CardDescription>{waiting ? `${waiting} approval${waiting === 1 ? "" : "s"} you can act on.` : "Nothing needs your sign-off right now."}</CardDescription>
+          </CardHeader>
+        </Card>
+      </Link>
+      <section>
+        <h2 className="mb-3 text-lg font-semibold">{terms.allApps}</h2>
+        <div className="grid gap-3 sm:grid-cols-4">{apps.map(appCard)}</div>
       </section>
     </div>
   );

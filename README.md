@@ -1,8 +1,9 @@
 # devin-internal-tools
 
 A small shared core in your own repo, plus Devin building each tool from a plain-English request,
-can replace an internal tool platform like Microsoft Power Apps. This proof of concept runs three
-of a fintech's internal tools (refunds, KYC review, feature flags) on that core.
+can replace an internal tool platform like Microsoft Power Apps. This proof of concept runs a fictional
+fintech's ("Ledgerline") internal tools on that core, branded, in their words, with their Power Apps data
+already imported, and a different view of each tool per role.
 
 ## Run it
 
@@ -17,38 +18,61 @@ Open http://localhost:3000. Requires Node 20+ and pnpm (`corepack enable`). Test
 | Power Apps capability     | Here                                                   | Code                                |
 | ------------------------- | ------------------------------------------------------ | ----------------------------------- |
 | Power Apps builder        | Devin builds each tool from a plain-English request    | `docs/ADD_TOOL.md`                  |
-| Dataverse                 | In-memory store seeded from JSON, with a Reset button  | `core/store.ts`, `data/`            |
+| Dataverse                 | In-memory store loaded from Power Apps CSV exports, with a Reset button | `core/store.ts`, `core/importer.ts`, `data/` |
 | Security roles / sign-in  | Role switcher + `can(user, action)`                    | `core/permissions.ts`               |
 | Dataverse auditing        | `logAudit()` + Audit Log page                          | `core/audit.ts`, `/audit`           |
 | Power Automate approvals  | `requestApproval()` / `approve()` + Approvals inbox    | `core/approvals.ts`, `/approvals`   |
-| Connectors                | Small mock adapters (payments, KYC vendor)             | `adapters/`                         |
+| Connectors                | Small mock adapters (payments with idempotency keys, KYC vendor) | `adapters/`             |
+| Field-level security      | SSN to last 4, DOB to year; Reveal only for kyc_reviewer, audited | `core/pii.ts`            |
+| Model-driven views, charts | Shared widgets composed by per-role view configs      | `components/widgets/`, `config/views/` |
 | Governance / admin center | Repo conventions + the ADD_TOOL playbook               | `AGENTS.md`, `docs/ADD_TOOL.md`     |
 
 ## Demo roles
 
-Switch user in the header. The sidebar only shows the tools a role can use.
+Switch user in the header. Each role lands on its own page and sees its own view of each tool
+(`config/roles.ts`).
 
-| User | Role           | Sees / can do                                                        |
-| ---- | -------------- | -------------------------------------------------------------------- |
-| Ana  | `ops_analyst`  | Refunds and ledger adjustments (over $500 / $1,000 go to approval)   |
-| Luis | `ops_lead`     | All tools; approves refunds, ledger adjustments and prod flag changes; New tool page |
-| Kim  | `kyc_reviewer` | KYC queue: approve / reject / escalate, reveal SSN and DOB (audited) |
-| Eli  | `eng_admin`    | Feature flags: toggle dev/staging, request prod changes; New tool page |
+| User  | Role           | Sees / can do                                                                 |
+| ----- | -------------- | ----------------------------------------------------------------------------- |
+| Ana   | `ops_analyst`  | Refunds work view (request first), ledger, read-only KYC status lookup        |
+| Luis  | `ops_lead`     | Approvals first; refunds, KYC team view (+ auditor CSV), plain-language flags; second KYC reviewer |
+| Kim   | `kyc_reviewer` | KYC queue by SLA and risk, Claim next, case page, Reveal SSN/DOB (audited)    |
+| Eli   | `eng_admin`    | Full flags view, brand switcher, Customize page, New tool                     |
+| Farah | `finance`      | Refunds dashboard: KPIs, charts, monthly summary for accounting               |
 
-A 60-second script: as Ana, refund $500.00 (instant) and $500.01 (needs approval). Switch to
-Luis and approve it in Approvals. As Kim, reveal an SSN. As Eli, request a prod flag change.
-Finish on the Audit Log as Luis, which shows all of it.
+A short script: as Ana, refund pay_1005 ($500, instant) and pay_1006 ($500.01, needs approval).
+As Luis, approve it in Approvals. As Kim, claim the next case, reveal an SSN and reject a high-risk
+case (goes to Luis). As Eli, request a prod flag change and switch the brand to "Ledgerline (alt)".
+As Farah, open Refunds. Finish on the Audit Log as Luis.
+
+## Make it yours
+
+Most changes are config, not code. The Customize page (Eli) shows each file and writes a Devin prompt for a change.
+
+| File                     | Controls                                                                      |
+| ------------------------ | ----------------------------------------------------------------------------- |
+| `config/brand.ts`        | Company name, logo, colors, neutral palette, font, corner radius, table density; two presets |
+| `config/terminology.ts`  | The client's words for things ("Refunds" or "Reversals", "Cases" or "Applications") |
+| `config/workflows.ts`    | Refund limits and approver, KYC SLA and second reviewer, flag environments needing approval, reason codes, Power Apps role mapping |
+| `config/roles.ts`        | Per role: landing page, home KPIs, sidebar order, visible tools, which view of each tool |
+| `config/views/`          | Each view's widgets (KPI tiles, charts, tables, queues, approvals, activity)  |
+| `config/import-map.ts`   | Power Apps (Dataverse) column names -> app fields                             |
+
+All imported data in `data/imports/powerapps/` is synthetic. It is only shaped like Power Apps
+(Dataverse) table exports.
 
 ## Layout
 
 ```
-core/       permissions, audit, approvals, masking, store, session (shared by every tool)
+config/     brand, terminology, workflows, roles, views, import map
+core/       permissions, audit, approvals, pii, store, importer, session (shared by every tool)
 adapters/   mock connectors: payments, KYC vendor
-tools/      refunds/, kyc/, flags/, ledger/ + registry.ts
-app/        shell: home, /approvals, /audit, /roadmap, /new-tool, /tools/[slug] (with a Platform view tab)
-data/       wires each tool's seed.json into the store; roadmap.json feeds /roadmap
+components/ widgets/ (KpiTile, LineChart, BarChart, WorkQueue, DataTable, ApprovalList, ActivityFeed, StatusSummary)
+tools/      refunds/, kyc/, flags/, ledger/ + registry.ts + sources.tsx (data sources views can use)
+app/        shell: home, /approvals, /audit, /customize, /roadmap, /new-tool, /tools/[slug]
+data/       imports/powerapps/*.csv, the ledger seed, roadmap.json
 docs/       ADD_TOOL.md, the playbook Devin follows
-tests/      Vitest: self-approval, $500 refund boundary, prod flag approval
+tests/      Vitest: self-approval, $500 refund boundary and daily cap, prod flag approval
 ```
 
 ## Not replicated

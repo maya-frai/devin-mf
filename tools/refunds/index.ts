@@ -1,17 +1,17 @@
 import type { ToolDefinition } from "@/core/types";
 import build from "./build.json";
-import { completeRefund } from "./logic";
+import { completeRefund, rejectRefund } from "./logic";
 import { manifest } from "./manifest";
 import Page from "./page";
+
+const refundId = (payload: Record<string, unknown>) => String(payload.refundId);
 
 const refunds: ToolDefinition = {
   manifest,
   build,
   Page,
-  onApproved: async (approval, approver) => {
-    const { paymentId, reason } = approval.payload as { paymentId: string; reason: string };
-    await completeRefund(approver, paymentId, reason);
-  },
+  onApproved: (approval, approver) => completeRefund(approver, refundId(approval.payload), `approval:${approval.id}`, true),
+  onRejected: (approval, approver) => rejectRefund(approver, refundId(approval.payload)),
 };
 
 export default refunds;

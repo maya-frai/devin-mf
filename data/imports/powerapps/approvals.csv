@@ -1,0 +1,7 @@
+msdyn_flowapprovalid,cr4f2_tool,cr4f2_action,cr4f2_target,msdyn_title,cr4f2_permission,cr4f2_payload,statuscode,createdby,createdon,cr4f2_reason
+apr_pa01,refunds,refunds.issue,payments/pay_1032,Refund $696.99 to Hugo Quinn: Service issue,refunds.approve,"{""refundId"": ""rf_045""}",Pending,Ana,2026-11-08T19:00:00Z,Service issue
+apr_pa02,refunds,refunds.issue,payments/pay_1034,"Refund $1,109.84 to Zoe Hughes: Customer request",refunds.approve,"{""refundId"": ""rf_046""}",Pending,Ana,2026-11-07T21:00:00Z,Customer request
+apr_pa03,refunds,refunds.issue,payments/pay_1035,Refund $879.86 to Mei Okafor: Customer request,refunds.approve,"{""refundId"": ""rf_047""}",Pending,Ana,2026-11-06T16:00:00Z,Customer request
+apr_pa04,refunds,refunds.issue,payments/pay_1036,Refund $501.75 to Lucas Romero: Service issue,refunds.approve,"{""refundId"": ""rf_048""}",Pending,Ana,2026-11-06T18:00:00Z,Service issue
+apr_pa90,kyc,kyc.reject,kyc_cases/kyc_2017,Reject Aisha Dubois (risk 91): Watchlist match confirmed,kyc.second_review,"{""caseId"": ""kyc_2017"", ""reason"": ""Watchlist match confirmed"", ""notes"": """", ""from"": ""open""}",Pending,Kim,2026-11-09T16:00:00Z,Watchlist match confirmed
+apr_pa91,flags,flags.prod_change,flags/flag_07/prod,Turn off in prod: New fraud risk model scoring payments,flags.approve,"{""flagId"": ""flag_07"", ""env"": ""prod"", ""enabled"": false, ""reason"": ""Ready for customers after staging soak""}",Pending,Eli,2026-11-09T18:00:00Z,Ready for customers after staging soak

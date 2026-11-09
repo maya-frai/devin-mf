@@ -1,0 +1,159 @@
+auditid,createdon,userid,cr4f2_securityrole,objecttypecode,operation,objectid,changedata_before,changedata_after,cr4f2_reason
+aud_0001,2026-11-09T20:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.rejected,kyc_cases/kyc_2024,"{""status"": ""open""}","{""status"": ""rejected""}",Document mismatch
+aud_0002,2026-11-09T19:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2024,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0003,2026-11-09T16:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.pending_second_review,kyc_cases/kyc_2017,"{""status"": ""open""}","{""status"": ""pending_second_review""}",Watchlist match confirmed
+aud_0004,2026-11-09T14:40:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2002,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0005,2026-11-09T04:40:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2001,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0006,2026-11-08T22:33:48Z,Luis,Ops Lead - Refunds,cr4f2_payment,approval.approved,payments/pay_1047,"{""status"": ""pending""}","{""status"": ""approved""}",Verified with customer
+aud_0007,2026-11-08T22:33:48Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1047,"{""refundedCents"": 0}","{""refundedCents"": 60505}",Customer request
+aud_0008,2026-11-08T20:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1180,,"{""refund"": ""rf_023"", ""amountCents"": 4727}",Customer request
+aud_0009,2026-11-08T20:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1180,"{""refundedCents"": 0}","{""refundedCents"": 4727}",Customer request
+aud_0010,2026-11-08T20:00:00Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.requested,payments/pay_1047,,"{""refund"": ""rf_038"", ""amountCents"": 60505}",Customer request
+aud_0011,2026-11-08T19:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1032,,"{""refund"": ""rf_045"", ""amountCents"": 69699}",Service issue
+aud_0012,2026-11-08T19:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_06/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
+aud_0013,2026-11-08T15:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.rejected,kyc_cases/kyc_2023,"{""status"": ""open""}","{""status"": ""rejected""}",Document mismatch
+aud_0014,2026-11-08T14:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2023,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0015,2026-11-08T13:40:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2004,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0016,2026-11-08T10:40:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2003,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0017,2026-11-08T09:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_06/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
+aud_0018,2026-11-08T06:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_14/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
+aud_0019,2026-11-08T03:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_07/prod,"{""prod"": false}","{""prod"": true}",Approved prod release
+aud_0020,2026-11-07T21:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1034,,"{""refund"": ""rf_046"", ""amountCents"": 110984}",Customer request
+aud_0021,2026-11-07T20:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_14/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
+aud_0022,2026-11-07T19:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2020,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
+aud_0023,2026-11-07T18:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2020,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0024,2026-11-07T17:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_07/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
+aud_0025,2026-11-07T13:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_06/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0026,2026-11-07T11:17:20Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.rejected,payments/pay_1124,"{""status"": ""pending_approval""}","{""status"": ""rejected""}",Outside refund policy
+aud_0027,2026-11-07T01:46:50Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1058,,"{""refund"": ""rf_007"", ""amountCents"": 12683}",Service issue
+aud_0028,2026-11-07T01:46:50Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1058,"{""refundedCents"": 0}","{""refundedCents"": 12683}",Service issue
+aud_0029,2026-11-07T00:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_14/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0030,2026-11-06T23:56:25Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1124,,"{""refund"": ""rf_025"", ""amountCents"": 6488}",Duplicate charge
+aud_0031,2026-11-06T21:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_07/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0032,2026-11-06T18:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1036,,"{""refund"": ""rf_048"", ""amountCents"": 50175}",Service issue
+aud_0033,2026-11-06T16:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1035,,"{""refund"": ""rf_047"", ""amountCents"": 87986}",Customer request
+aud_0034,2026-11-06T13:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2021,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
+aud_0035,2026-11-06T13:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2022,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
+aud_0036,2026-11-06T13:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_04/prod,"{""prod"": false}","{""prod"": true}",Approved prod release
+aud_0037,2026-11-06T12:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2021,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0038,2026-11-06T12:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2022,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0039,2026-11-06T12:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_08/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
+aud_0040,2026-11-06T10:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_03/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
+aud_0041,2026-11-06T06:24:32Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1134,,"{""refund"": ""rf_015"", ""amountCents"": 3014}",Customer request
+aud_0042,2026-11-06T06:24:32Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1134,"{""refundedCents"": 0}","{""refundedCents"": 3014}",Customer request
+aud_0043,2026-11-06T03:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_04/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
+aud_0044,2026-11-06T02:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_08/staging,"{""staging"": true}","{""staging"": false}",Rollout plan step
+aud_0045,2026-11-06T01:08:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1095,,"{""refund"": ""rf_016"", ""amountCents"": 6956}",Duplicate charge
+aud_0046,2026-11-06T01:08:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1095,"{""refundedCents"": 0}","{""refundedCents"": 6956}",Duplicate charge
+aud_0047,2026-11-06T00:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_03/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
+aud_0048,2026-11-05T16:56:01Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1198,,"{""refund"": ""rf_012"", ""amountCents"": 33456}",Customer request
+aud_0049,2026-11-05T16:56:01Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1198,"{""refundedCents"": 0}","{""refundedCents"": 33456}",Customer request
+aud_0050,2026-11-05T07:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_04/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0051,2026-11-05T06:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_08/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0052,2026-11-05T04:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_03/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0053,2026-11-05T00:34:14Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1247,,"{""refund"": ""rf_017"", ""amountCents"": 14606}",Duplicate charge
+aud_0054,2026-11-05T00:34:14Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1247,"{""refundedCents"": 0}","{""refundedCents"": 14606}",Duplicate charge
+aud_0055,2026-11-04T21:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2018,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
+aud_0056,2026-11-04T21:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2019,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
+aud_0057,2026-11-04T21:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.rejected,kyc_cases/kyc_2025,"{""status"": ""open""}","{""status"": ""rejected""}",Document mismatch
+aud_0058,2026-11-04T20:27:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1090,,"{""refund"": ""rf_006"", ""amountCents"": 10894}",Customer request
+aud_0059,2026-11-04T20:27:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1090,"{""refundedCents"": 0}","{""refundedCents"": 10894}",Customer request
+aud_0060,2026-11-04T20:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2018,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0061,2026-11-04T20:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2019,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0062,2026-11-04T20:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2025,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0063,2026-11-04T19:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_05/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
+aud_0064,2026-11-04T09:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_05/staging,"{""staging"": true}","{""staging"": false}",Rollout plan step
+aud_0065,2026-11-04T06:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_13/prod,"{""prod"": false}","{""prod"": true}",Approved prod release
+aud_0066,2026-11-03T20:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_13/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
+aud_0067,2026-11-03T13:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_05/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0068,2026-11-03T00:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_13/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0069,2026-10-31T17:56:26Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.requested,payments/pay_1160,,"{""refund"": ""rf_031"", ""amountCents"": 5234}",Other
+aud_0070,2026-10-31T17:56:26Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1160,"{""refundedCents"": 0}","{""refundedCents"": 5234}",Other
+aud_0071,2026-10-31T03:31:26Z,Luis,Ops Lead - Refunds,cr4f2_payment,approval.approved,payments/pay_1224,"{""status"": ""pending""}","{""status"": ""approved""}",Verified with customer
+aud_0072,2026-10-31T03:31:26Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1224,"{""refundedCents"": 0}","{""refundedCents"": 139445}",Duplicate charge
+aud_0073,2026-10-30T18:56:23Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1224,,"{""refund"": ""rf_022"", ""amountCents"": 139445}",Duplicate charge
+aud_0074,2026-10-30T10:54:55Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1289,,"{""refund"": ""rf_005"", ""amountCents"": 7581}",Service issue
+aud_0075,2026-10-30T10:54:55Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1289,"{""refundedCents"": 0}","{""refundedCents"": 7581}",Service issue
+aud_0076,2026-10-30T01:16:14Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.requested,payments/pay_1239,,"{""refund"": ""rf_044"", ""amountCents"": 18430}",Service issue
+aud_0077,2026-10-30T01:16:14Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1239,"{""refundedCents"": 0}","{""refundedCents"": 18430}",Service issue
+aud_0078,2026-10-29T22:35:04Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1100,,"{""refund"": ""rf_034"", ""amountCents"": 24767}",Fraud
+aud_0079,2026-10-29T22:35:04Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1100,"{""refundedCents"": 0}","{""refundedCents"": 24767}",Fraud
+aud_0080,2026-10-29T11:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1018,,"{""refund"": ""rf_003"", ""amountCents"": 2999}",Duplicate charge
+aud_0081,2026-10-29T11:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1018,"{""refundedCents"": 0}","{""refundedCents"": 2999}",Duplicate charge
+aud_0082,2026-10-29T07:12:32Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1202,,"{""refund"": ""rf_009"", ""amountCents"": 14615}",Service issue
+aud_0083,2026-10-29T07:12:32Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1202,"{""refundedCents"": 0}","{""refundedCents"": 14615}",Service issue
+aud_0084,2026-10-28T17:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_10/prod,"{""prod"": false}","{""prod"": true}",Approved prod release
+aud_0085,2026-10-28T07:05:59Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1273,,"{""refund"": ""rf_027"", ""amountCents"": 21460}",Customer request
+aud_0086,2026-10-28T07:05:59Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1273,"{""refundedCents"": 0}","{""refundedCents"": 21460}",Customer request
+aud_0087,2026-10-28T07:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_10/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
+aud_0088,2026-10-28T05:44:54Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1246,,"{""refund"": ""rf_030"", ""amountCents"": 7374}",Duplicate charge
+aud_0089,2026-10-28T05:44:54Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1246,"{""refundedCents"": 0}","{""refundedCents"": 7374}",Duplicate charge
+aud_0090,2026-10-28T04:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_15/prod,"{""prod"": false}","{""prod"": true}",Approved prod release
+aud_0091,2026-10-28T01:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_02/prod,"{""prod"": false}","{""prod"": true}",Approved prod release
+aud_0092,2026-10-27T18:07:44Z,Luis,Ops Lead - Refunds,cr4f2_payment,approval.approved,payments/pay_1097,"{""status"": ""pending""}","{""status"": ""approved""}",Verified with customer
+aud_0093,2026-10-27T18:07:44Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1097,"{""refundedCents"": 0}","{""refundedCents"": 94669}",Duplicate charge
+aud_0094,2026-10-27T18:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_15/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
+aud_0095,2026-10-27T15:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_02/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
+aud_0096,2026-10-27T11:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_10/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0097,2026-10-27T00:20:34Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1097,,"{""refund"": ""rf_028"", ""amountCents"": 94669}",Duplicate charge
+aud_0098,2026-10-26T22:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_15/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0099,2026-10-26T19:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_02/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0100,2026-10-26T18:14:56Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.rejected,payments/pay_1089,"{""status"": ""pending_approval""}","{""status"": ""rejected""}",Outside refund policy
+aud_0101,2026-10-26T14:49:59Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1089,,"{""refund"": ""rf_043"", ""amountCents"": 24906}",Other
+aud_0102,2026-10-24T22:29:43Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1111,,"{""refund"": ""rf_020"", ""amountCents"": 4061}",Customer request
+aud_0103,2026-10-24T22:29:43Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1111,"{""refundedCents"": 0}","{""refundedCents"": 4061}",Customer request
+aud_0104,2026-10-24T08:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1012,,"{""refund"": ""rf_002"", ""amountCents"": 4500}",Duplicate charge
+aud_0105,2026-10-24T08:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1012,"{""refundedCents"": 0}","{""refundedCents"": 4500}",Duplicate charge
+aud_0106,2026-10-23T20:27:26Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.requested,payments/pay_1093,,"{""refund"": ""rf_018"", ""amountCents"": 18884}",Customer request
+aud_0107,2026-10-23T20:27:26Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1093,"{""refundedCents"": 0}","{""refundedCents"": 18884}",Customer request
+aud_0108,2026-10-23T17:49:18Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1053,,"{""refund"": ""rf_008"", ""amountCents"": 9010}",Service issue
+aud_0109,2026-10-23T17:49:18Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1053,"{""refundedCents"": 0}","{""refundedCents"": 9010}",Service issue
+aud_0110,2026-10-22T14:28:36Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1129,,"{""refund"": ""rf_039"", ""amountCents"": 10878}",Duplicate charge
+aud_0111,2026-10-22T14:28:36Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1129,"{""refundedCents"": 0}","{""refundedCents"": 10878}",Duplicate charge
+aud_0112,2026-10-21T23:37:18Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.requested,payments/pay_1148,,"{""refund"": ""rf_024"", ""amountCents"": 7199}",Customer request
+aud_0113,2026-10-21T23:37:18Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1148,"{""refundedCents"": 0}","{""refundedCents"": 7199}",Customer request
+aud_0114,2026-10-21T14:44:56Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.requested,payments/pay_1201,,"{""refund"": ""rf_014"", ""amountCents"": 7744}",Duplicate charge
+aud_0115,2026-10-21T14:44:56Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1201,"{""refundedCents"": 0}","{""refundedCents"": 7744}",Duplicate charge
+aud_0116,2026-10-21T11:53:36Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1050,,"{""refund"": ""rf_035"", ""amountCents"": 23464}",Customer request
+aud_0117,2026-10-21T11:53:36Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1050,"{""refundedCents"": 0}","{""refundedCents"": 23464}",Customer request
+aud_0118,2026-10-20T05:50:40Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.rejected,payments/pay_1229,"{""status"": ""pending_approval""}","{""status"": ""rejected""}",Outside refund policy
+aud_0119,2026-10-20T02:20:42Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1229,,"{""refund"": ""rf_033"", ""amountCents"": 7580}",Fraud
+aud_0120,2026-10-19T21:41:42Z,Luis,Ops Lead - Refunds,cr4f2_payment,approval.approved,payments/pay_1220,"{""status"": ""pending""}","{""status"": ""approved""}",Verified with customer
+aud_0121,2026-10-19T21:41:42Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1220,"{""refundedCents"": 0}","{""refundedCents"": 69346}",Service issue
+aud_0122,2026-10-19T17:51:21Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1220,,"{""refund"": ""rf_011"", ""amountCents"": 69346}",Service issue
+aud_0123,2026-10-19T10:44:02Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1033,,"{""refund"": ""rf_026"", ""amountCents"": 22952}",Duplicate charge
+aud_0124,2026-10-19T10:44:02Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1033,"{""refundedCents"": 0}","{""refundedCents"": 22952}",Duplicate charge
+aud_0125,2026-10-18T20:10:38Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1155,,"{""refund"": ""rf_010"", ""amountCents"": 6644}",Service issue
+aud_0126,2026-10-18T20:10:38Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1155,"{""refundedCents"": 0}","{""refundedCents"": 6644}",Service issue
+aud_0127,2026-10-17T22:15:55Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1123,,"{""refund"": ""rf_013"", ""amountCents"": 21078}",Other
+aud_0128,2026-10-17T22:15:55Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1123,"{""refundedCents"": 0}","{""refundedCents"": 21078}",Other
+aud_0129,2026-10-17T21:31:31Z,Luis,Ops Lead - Refunds,cr4f2_payment,approval.approved,payments/pay_1088,"{""status"": ""pending""}","{""status"": ""approved""}",Verified with customer
+aud_0130,2026-10-17T21:31:31Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1088,"{""refundedCents"": 0}","{""refundedCents"": 85901}",Customer request
+aud_0131,2026-10-17T13:48:19Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.requested,payments/pay_1177,,"{""refund"": ""rf_040"", ""amountCents"": 45306}",Duplicate charge
+aud_0132,2026-10-17T13:48:19Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1177,"{""refundedCents"": 0}","{""refundedCents"": 45306}",Duplicate charge
+aud_0133,2026-10-17T13:19:55Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1168,,"{""refund"": ""rf_019"", ""amountCents"": 28260}",Duplicate charge
+aud_0134,2026-10-17T13:19:55Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1168,"{""refundedCents"": 0}","{""refundedCents"": 28260}",Duplicate charge
+aud_0135,2026-10-17T10:56:59Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.requested,payments/pay_1235,,"{""refund"": ""rf_032"", ""amountCents"": 23302}",Customer request
+aud_0136,2026-10-17T10:56:59Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1235,"{""refundedCents"": 0}","{""refundedCents"": 23302}",Customer request
+aud_0137,2026-10-17T10:46:05Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.requested,payments/pay_1109,,"{""refund"": ""rf_036"", ""amountCents"": 33059}",Fraud
+aud_0138,2026-10-17T10:46:05Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1109,"{""refundedCents"": 0}","{""refundedCents"": 33059}",Fraud
+aud_0139,2026-10-17T06:31:58Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1088,,"{""refund"": ""rf_037"", ""amountCents"": 85901}",Customer request
+aud_0140,2026-10-17T05:16:36Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1117,,"{""refund"": ""rf_004"", ""amountCents"": 3625}",Service issue
+aud_0141,2026-10-17T05:16:36Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1117,"{""refundedCents"": 0}","{""refundedCents"": 3625}",Service issue
+aud_0142,2026-10-16T06:08:11Z,Luis,Ops Lead - Refunds,cr4f2_payment,approval.approved,payments/pay_1132,"{""status"": ""pending""}","{""status"": ""approved""}",Verified with customer
+aud_0143,2026-10-16T06:08:11Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1132,"{""refundedCents"": 0}","{""refundedCents"": 84802}",Customer request
+aud_0144,2026-10-15T23:04:43Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1132,,"{""refund"": ""rf_021"", ""amountCents"": 84802}",Customer request
+aud_0145,2026-10-15T22:34:37Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1308,,"{""refund"": ""rf_042"", ""amountCents"": 30360}",Customer request
+aud_0146,2026-10-15T22:34:37Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1308,"{""refundedCents"": 0}","{""refundedCents"": 30360}",Customer request
+aud_0147,2026-10-15T18:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1004,,"{""refund"": ""rf_001"", ""amountCents"": 2350}",Service issue
+aud_0148,2026-10-15T18:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1004,"{""refundedCents"": 0}","{""refundedCents"": 2350}",Service issue
+aud_0149,2026-10-13T04:59:22Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1169,,"{""refund"": ""rf_029"", ""amountCents"": 3149}",Service issue
+aud_0150,2026-10-13T04:59:22Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1169,"{""refundedCents"": 0}","{""refundedCents"": 3149}",Service issue
+aud_0151,2026-10-12T16:59:21Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.requested,payments/pay_1214,,"{""refund"": ""rf_041"", ""amountCents"": 1210}",Customer request
+aud_0152,2026-10-12T16:59:21Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1214,"{""refundedCents"": 0}","{""refundedCents"": 1210}",Customer request
+aud_0153,2026-09-30T13:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_01/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
+aud_0154,2026-09-30T03:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_01/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
+aud_0155,2026-09-29T07:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_01/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
+aud_0156,2026-07-22T19:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_09/prod,"{""prod"": false}","{""prod"": true}",Approved prod release
+aud_0157,2026-06-12T16:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_12/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
+aud_0158,2026-03-14T05:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_11/prod,"{""prod"": true}","{""prod"": false}",Approved prod release

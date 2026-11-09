@@ -1,10 +1,11 @@
+import { WORKFLOWS } from "@/config/workflows";
 import { pendingApprovalFor, requestApproval } from "@/core/approvals";
 import { logAudit } from "@/core/audit";
 import { assertCan } from "@/core/permissions";
 import { getRow, list, updateRow, type Row } from "@/core/store";
 import type { User } from "@/core/users";
 
-export const APPROVAL_LIMIT_CENTS = 100_000; // $1,000
+export const APPROVAL_LIMIT_CENTS = WORKFLOWS.ledger.approvalLimitCents;
 
 export type Direction = "debit" | "credit";
 export type Account = Row & { name: string; type: string; currency: string; balanceCents: number; lastAdjustment?: string };
@@ -13,7 +14,7 @@ export const listAccounts = () => list<Account>("ledger_accounts");
 export const formatUsd = (cents: number) =>
   (cents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" });
 
-// Up to $1,000 posts immediately. Above $1,000 needs an ops lead who isn't the requester.
+// Up to the limit in config/workflows.ts posts immediately. Above it needs an approver who isn't the requester.
 export function adjustBalance(user: User, accountId: string, direction: Direction, amountCents: number, reason: string) {
   assertCan(user, "ledger.adjust");
   if (direction !== "debit" && direction !== "credit") throw new Error("Choose debit or credit");
@@ -33,6 +34,7 @@ export function adjustBalance(user: User, accountId: string, direction: Directio
     target,
     summary: `${direction === "credit" ? "Credit" : "Debit"} ${formatUsd(amountCents)} ${direction === "credit" ? "to" : "from"} ${account.name}: ${reason}`,
     permission: "ledger.approve",
+    reason,
     payload: { accountId, direction, amountCents, reason },
   });
   return { status: "pending_approval" as const, approvalId: approval.id };
@@ -41,9 +43,13 @@ export function adjustBalance(user: User, accountId: string, direction: Directio
 export function applyAdjustment(user: User, accountId: string, direction: Direction, amountCents: number, reason: string) {
   const account = getRow<Account>("ledger_accounts", accountId);
   const delta = direction === "credit" ? amountCents : -amountCents;
+  const before = { balanceCents: account.balanceCents };
   updateRow<Account>("ledger_accounts", accountId, {
     balanceCents: account.balanceCents + delta,
     lastAdjustment: `${direction} ${formatUsd(amountCents)}: ${reason}`,
   });
-  logAudit(user, `ledger.${direction}`, `ledger_accounts/${accountId}`, { amount: amountCents, reason });
+  logAudit({
+    actor: user, tool: "ledger", action: `ledger.${direction}`, entityId: `ledger_accounts/${accountId}`,
+    before, after: { balanceCents: before.balanceCents + delta }, reason,
+  });
 }

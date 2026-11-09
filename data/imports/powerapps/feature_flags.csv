@@ -1,0 +1,16 @@
+cr4f2_flagid,cr4f2_key,cr4f2_description,cr4f2_owningteam,cr4f2_dev,cr4f2_staging,cr4f2_prod,cr4f2_rolloutpercent,modifiedon
+flag_01,new_onboarding_flow,Redesigned signup and identity capture,growth,Yes,Yes,No,0,2026-09-30T13:00:00Z
+flag_02,instant_payouts,Same-day payouts for merchants,payments,Yes,Yes,Yes,25,2026-10-28T01:00:00Z
+flag_03,sanctions_rescreen_v2,Nightly sanctions re-screening of all customers,compliance,Yes,Yes,No,0,2026-11-06T10:00:00Z
+flag_04,card_3ds2,Extra card verification step at checkout,payments,Yes,Yes,Yes,100,2026-11-06T13:00:00Z
+flag_05,dispute_portal,Customers can open disputes themselves,ops,Yes,No,No,0,2026-11-04T19:00:00Z
+flag_06,ledger_double_entry_check,Extra ledger consistency check,platform,Yes,Yes,No,0,2026-11-08T19:00:00Z
+flag_07,risk_model_v7,New fraud risk model scoring payments,risk,Yes,Yes,Yes,5,2026-11-08T03:00:00Z
+flag_08,dark_launch_search,New customer search backend,platform,Yes,No,No,0,2026-11-06T12:00:00Z
+flag_09,referral_bonus,Referral bonus banner in the app,growth,Yes,Yes,Yes,5,2026-07-22T19:00:00Z
+flag_10,ach_same_day,Same-day bank transfers,payments,Yes,Yes,Yes,100,2026-10-28T17:00:00Z
+flag_11,pdf_statements_v2,New monthly statement design,platform,Yes,No,No,0,2026-03-14T05:00:00Z
+flag_12,legacy_kyc_vendor,Fallback to the old identity vendor,compliance,Yes,Yes,No,0,2026-06-12T16:00:00Z
+flag_13,mobile_biometrics,Face ID login on mobile,mobile,Yes,Yes,Yes,100,2026-11-04T06:00:00Z
+flag_14,fx_rates_cache,Faster currency conversion rates,payments,Yes,Yes,No,0,2026-11-08T06:00:00Z
+flag_15,support_chat_bot,Support chat assistant,ops,Yes,Yes,Yes,5,2026-10-28T04:00:00Z

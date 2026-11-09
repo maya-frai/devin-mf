@@ -14,10 +14,11 @@ The New tool page (`/new-tool`) generates this request.
 | File          | What goes in it                                                         |
 | ------------- | ----------------------------------------------------------------------- |
 | `manifest.ts` | `ToolManifest` (below)                                                  |
-| `seed.json`   | 15–30 synthetic rows with unique `id`s. SSNs start with `9`, emails `@example.com` |
+| `seed.json`   | 15–30 synthetic rows with unique `id`s (or a Power Apps CSV in `data/imports/powerapps/` plus an entry in `config/import-map.ts`) |
 | `logic.ts`    | Plain functions taking a `user`: permission check, mutation, audit, approval. Tests import this |
-| `actions.ts`  | `"use server"` wrappers: `getCurrentUser()`, call logic, `revalidatePath("/", "layout")`, return a `FormState` |
-| `page.tsx`    | Server component. Hides buttons with `can()`. Forms use `ActionForm`, `SelectField`, `ReasonField` |
+| `actions.ts`  | `"use server"` wrappers: `guarded("<slug>.<verb>", (user) => logic(user, ...))` checks `can()` first and returns a `WriteResult` |
+| `sources.tsx` | Named metrics, data sources and panels the view configs can use |
+| `page.tsx`    | `<RenderView tool="<slug>" ... />`; the role's view comes from `config/roles.ts` + `config/views/<slug>.ts` |
 | `build.json`  | `{ "minutes": 0, "acus": null, "pr_url": "" }`, filled in when done     |
 | `index.ts`    | `ToolDefinition`: `{ manifest, build, Page, onApproved? }`              |
 
@@ -41,9 +42,11 @@ export const manifest: ToolManifest = {
 | Need                  | Use                                                            |
 | --------------------- | -------------------------------------------------------------- |
 | Current user          | `getCurrentUser()`, from `core/session.ts`                     |
-| Permission            | `assertCan(user, "<slug>.<verb>")` in logic, `can()` in pages  |
-| Audit                 | `logAudit(user, "<slug>.<event>", "<collection>/<id>", details)` on every mutation |
-| Approval              | `requestApproval(user, { tool, action, target, summary, permission, payload })` |
+| Permission            | `guarded()` in actions, `assertCan()` in logic; disable (don't hide) buttons with `GuardedButton` |
+| Audit                 | `logAudit({ actor, tool, action, entityId, before, after, reason })` on every write |
+| Approval              | `requestApproval(user, { tool, action, target, summary, permission, payload, reason })` |
+| Business rules        | Read limits, approvers and reason codes from `config/workflows.ts`; never hardcode them |
+| Labels and colors     | `config/terminology.ts` (`useTerms()` / `getTerms()`) and theme classes; no hardcoded colors |
 | Already pending?      | `pendingApprovalFor(target)`                                   |
 | Data                  | `list()`, `getRow()`, `updateRow()`, from `core/store.ts`      |
 | PII                   | `mask()` plus `<MaskedField>`. Never send a raw SSN or DOB to the browser |
@@ -59,10 +62,11 @@ own `<slug>.approve` entry.
 
 ## 5. Register (three one-line edits)
 
-1. `data/index.ts`: import `seed.json` as a collection.
-2. `core/permissions.ts`: add `<slug>.view` plus one entry per verb (including `<slug>.approve`).
-3. `tools/registry.ts`: add the tool to `TOOLS`. The sidebar, home card, Platform view and
-   `/tools/<slug>` route then pick it up.
+1. `data/index.ts`: import `seed.json` as a collection (or map the CSV in `config/import-map.ts`).
+2. `core/permissions.ts`: one entry per verb (including `<slug>.approve`). Who can *see* the tool is
+   `config/roles.ts`: add `tools.<slug> = { view }` for each role, and the slug to their `sidebar`.
+3. `tools/registry.ts` (add to `TOOLS`) and `tools/sources.tsx` (add its sources). The sidebar,
+   home, Platform view and `/tools/<slug>` route then pick it up.
 
 ## 6. build.json
 
@@ -71,9 +75,9 @@ Set `acus` if known, otherwise `null`. Set `pr_url` once the PR exists.
 
 ## Done checklist
 
-- [ ] All seven files exist in `tools/<slug>/`; each is under ~150 lines
-- [ ] Registered in `data/index.ts`, `core/permissions.ts` and `tools/registry.ts`
-- [ ] Every mutation calls `assertCan` and `logAudit`; reasons are required where asked
+- [ ] The files above exist in `tools/<slug>/`; each is under ~150 lines
+- [ ] Registered in data, `core/permissions.ts`, `config/roles.ts`, a view in `config/views/`, `tools/registry.ts` and `tools/sources.tsx`
+- [ ] Every write goes through `guarded()`, requires a reason, and calls `logAudit` with before/after
 - [ ] Sensitive actions go through `requestApproval`; the requester cannot approve
 - [ ] PII is masked; Reveal works only for allowed roles
 - [ ] `pnpm lint && pnpm build` pass; only tests the request asked for (`pnpm test`)

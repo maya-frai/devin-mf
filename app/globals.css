@@ -26,6 +26,8 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -63,6 +65,8 @@
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
+  --success: #15803d;
+  --warning: #b45309;
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -95,3 +99,7 @@
     @apply font-sans;
   }
 }
+/* Table density comes from config/brand.ts (data-density on <html>). */
+[data-density="compact"] [data-slot="table-cell"] { padding-top: 0.2rem; padding-bottom: 0.2rem; }
+[data-density="compact"] [data-slot="table-head"] { height: 2rem; }
+[data-density="compact"] [data-slot="card"] { gap: 0.75rem; }

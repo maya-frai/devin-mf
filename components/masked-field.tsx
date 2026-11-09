@@ -2,12 +2,14 @@
 
 import { useState, useTransition } from "react";
 import { revealPii } from "@/core/actions";
-import type { PiiField } from "@/core/mask";
+import type { PiiField } from "@/core/pii";
+import { toast } from "./toast";
 import { Button } from "@/components/ui/button";
 
 // Receives only the masked value. The raw value is fetched on Reveal,
 // which the server permission-checks and audits.
 export function MaskedField(props: {
+  tool: string;
   collection: string;
   id: string;
   field: PiiField;
@@ -20,9 +22,10 @@ export function MaskedField(props: {
 
   const reveal = () =>
     startTransition(async () => {
-      const res = await revealPii(props.collection, props.id, props.field);
+      const res = await revealPii(props.tool, props.collection, props.id, props.field);
       setValue(res.value);
       setError(res.error);
+      toast(res.error ?? "Logged to audit trail", !!res.error);
     });
 
   return (

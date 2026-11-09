@@ -1,7 +1,8 @@
 "use client";
 
-import { useActionState, type ReactNode } from "react";
+import { useActionState, useEffect, type ReactNode } from "react";
 import type { FormState } from "@/core/types";
+import { toast } from "./toast";
 
 // Small wrapper so every tool form shows the server action's result the same way.
 export function ActionForm(props: {
@@ -9,8 +10,12 @@ export function ActionForm(props: {
   children: ReactNode;
 }) {
   const [state, formAction, pending] = useActionState(props.action, {});
+  useEffect(() => {
+    if (state.error) toast(state.error, true);
+    else if (state.message) toast(state.pending ? "Sent for approval" : "Logged to audit trail");
+  }, [state]);
   return (
-    <form action={formAction} className="flex flex-wrap items-end gap-3">
+    <form action={formAction} className="flex flex-wrap items-start gap-3">
       <fieldset disabled={pending} className="contents">
         {props.children}
       </fieldset>

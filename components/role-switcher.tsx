@@ -4,12 +4,12 @@ import { useTransition } from "react";
 import { switchUser } from "@/core/actions";
 import type { User } from "@/core/users";
 
-export function RoleSwitcher({ users, currentId }: { users: User[]; currentId: string }) {
+export function RoleSwitcher({ users, currentId, label }: { users: User[]; currentId: string; label: string }) {
   const [pending, startTransition] = useTransition();
 
   return (
     <label className="flex items-center gap-2 text-sm">
-      <span className="text-muted-foreground">Signed in as</span>
+      <span className="text-muted-foreground">{label}</span>
       <select
         aria-label="Switch user"
         className="h-8 rounded-lg border bg-background px-2 font-medium disabled:opacity-50"

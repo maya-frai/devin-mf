@@ -1,11 +1,12 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
-import { getCurrentUser } from "@/core/session";
-import { setFlag, type Env } from "./logic";
+import { guarded } from "@/core/guard";
+import { setFlag, setRollout, type Env } from "./logic";
 
-export async function toggleFlagAction(flagId: string, env: Env, enabled: boolean) {
-  const user = await getCurrentUser();
-  setFlag(user, flagId, env, enabled);
-  revalidatePath("/", "layout");
+export async function toggleFlagAction(flagId: string, env: Env, enabled: boolean, reason: string) {
+  return guarded("flags.toggle", (user) => setFlag(user, flagId, env, enabled, reason));
+}
+
+export async function rolloutAction(flagId: string, rolloutPct: number, reason: string) {
+  return guarded("flags.toggle", (user) => setRollout(user, flagId, rolloutPct, reason));
 }
