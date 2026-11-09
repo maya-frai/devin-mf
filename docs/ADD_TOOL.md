@@ -1,77 +1,81 @@
 # Playbook: add an internal tool
 
-Devin follows this playbook to turn a plain-English request (for example "Build a refunds
-dashboard where analysts request refunds and leads approve them") into a working tool.
-It replaces the Power Apps builder, and its conventions replace the admin center.
+Devin follows this playbook to turn a plain-English request into a tool on the shared core.
+The three existing tools are the reference: `tools/refunds` (approval above a threshold, adapter),
+`tools/kyc` (PII masking, decisions with a reason) and `tools/flags` (approval per environment).
 
-## 1. Read the request
+## Input
 
-- Find the users (which roles), the data (which table), and the sensitive actions (which ones
-  move money, change KYC status, or flip production flags).
-- Ask only if a role or approval rule is genuinely ambiguous. Otherwise pick the safe default:
-  the action needs approval and the data is masked.
+A short request naming the tool, who uses it, what they do and which actions are sensitive.
+The New tool page (`/new-tool`) generates this request.
 
-## 2. Create `tools/<slug>/`
+## 1. Folder layout: `tools/<slug>/`
 
-| File          | Purpose                                                              |
-| ------------- | -------------------------------------------------------------------- |
-| `manifest.ts` | `ToolManifest`: slug, name, description, what it replaces, `uses` (Platform view) |
-| `seed.json`   | 15–30 synthetic rows, each with a unique `id`                        |
-| `logic.ts`    | Plain functions taking a `user`: permission, mutation, audit (tested) |
-| `page.tsx`    | Server component; reads data and calls `can()` to hide buttons       |
-| `actions.ts`  | Thin `"use server"` wrappers: `getCurrentUser()` → logic → revalidate |
-| `build.json`  | `{ "minutes": 0, "acus": 0, "pr_url": "" }`, filled in after the PR  |
-| `index.ts`    | Puts together the `ToolDefinition` (manifest, build, Page, onApproved) |
+| File          | What goes in it                                                         |
+| ------------- | ----------------------------------------------------------------------- |
+| `manifest.ts` | `ToolManifest` (below)                                                  |
+| `seed.json`   | 15–30 synthetic rows with unique `id`s. SSNs start with `9`, emails `@example.com` |
+| `logic.ts`    | Plain functions taking a `user`: permission check, mutation, audit, approval. Tests import this |
+| `actions.ts`  | `"use server"` wrappers: `getCurrentUser()`, call logic, `revalidatePath("/", "layout")`, return a `FormState` |
+| `page.tsx`    | Server component. Hides buttons with `can()`. Forms use `ActionForm`, `SelectField`, `ReasonField` |
+| `build.json`  | `{ "minutes": 0, "acus": null, "pr_url": "" }`, filled in when done     |
+| `index.ts`    | `ToolDefinition`: `{ manifest, build, Page, onApproved? }`              |
 
-Synthetic data only: SSNs start with `9` (never issued), emails use `example.com`.
-
-## 3. Register it (three one-line edits)
-
-1. `data/index.ts`: import `seed.json` and add it as a collection named `<slug>`.
-2. `core/permissions.ts`: add `<slug>.view` plus one entry for each verb (e.g. `refunds.request`).
-3. `tools/registry.ts`: add the tool's default export to `TOOLS`.
-
-The header nav, home page card and `/tools/<slug>` route then pick it up automatically.
-
-## 4. Rules every tool follows
-
-- **Permissions**: every action calls `assertCan(user, "<slug>.<verb>")`, and the page hides
-  buttons the user can't use (`can()`).
-- **Audit**: every mutation calls `logAudit(user, "<slug>.<verb>", target, details)`.
-- **Approvals**: money movement, KYC decisions and production changes call
-  `requestApproval()`. The real effect runs in `onApproved` in `index.ts`, usually through an
-  adapter. Core already blocks an approver from approving their own request.
-- **PII**: never send raw `ssn` or `dob` to the browser. Render `<MaskedField>` instead (it
-  passes only the last 4 digits). Reveal is permission-checked and audited by core.
-- **Connectors**: external calls go through `adapters/`. Add a small mock if one is missing.
-- Keep each file under about 150 lines. Use only the existing stack. Ask before adding any
-  dependency. Write only the tests the request asks for (Vitest).
-
-## Logic pattern (see `tools/refunds/logic.ts`)
+## 2. Manifest
 
 ```ts
-export async function requestRefund(user: User, paymentId: string, reason: string) {
-  assertCan(user, "refunds.request");
-  const payment = getPayment(paymentId);                 // adapter
-  logAudit(user, "refunds.requested", `payments/${paymentId}`, { reason });
-  if (payment.amountCents <= AUTO_REFUND_LIMIT_CENTS) return completeRefund(user, paymentId, reason);
-  return requestApproval(user, {
-    tool: "refunds", action: "refunds.issue", target: `payments/${paymentId}`,
-    summary: `Refund to ${payment.customer}`, permission: "refunds.approve", payload: { paymentId, reason },
-  });
-}
+export const manifest: ToolManifest = {
+  slug: "refunds",
+  name: "Refunds",
+  description: "One sentence shown on the home card and page header.",
+  replaces: "Refunds dashboard (Power Apps)",
+  uses: [ // shown on the Platform view tab, each linking to the code
+    { capability: "Roles", detail: "refunds.view, refunds.request, refunds.approve", file: "core/permissions.ts" },
+    { capability: "Approvals", detail: "Refunds over $500", file: "core/approvals.ts" },
+  ],
+};
 ```
 
-## 5. Finish
+## 3. Core functions to use
 
-- `pnpm build` passes, then click through the tool as each of Ana, Luis, Kim and Eli.
-- Open a PR, then put the minutes, ACUs and PR URL in `build.json`.
+| Need                  | Use                                                            |
+| --------------------- | -------------------------------------------------------------- |
+| Current user          | `getCurrentUser()`, from `core/session.ts`                     |
+| Permission            | `assertCan(user, "<slug>.<verb>")` in logic, `can()` in pages  |
+| Audit                 | `logAudit(user, "<slug>.<event>", "<collection>/<id>", details)` on every mutation |
+| Approval              | `requestApproval(user, { tool, action, target, summary, permission, payload })` |
+| Already pending?      | `pendingApprovalFor(target)`                                   |
+| Data                  | `list()`, `getRow()`, `updateRow()`, from `core/store.ts`      |
+| PII                   | `mask()` plus `<MaskedField>`. Never send a raw SSN or DOB to the browser |
+| External system       | A small mock in `adapters/`, e.g. `adapters/payments.ts`       |
 
-## Checklist
+## 4. When approvals apply
 
-- [ ] `tools/<slug>/` has manifest, logic, page, actions, seed (15–30 rows), build.json and index
+Use an approval for money movement, irreversible customer decisions and production changes.
+Name the rule in the request (e.g. "above $500", "prod only"). Below the rule, apply the change
+immediately and audit it. Above it, call `requestApproval()` and apply the change in `onApproved`
+in `index.ts`. Core blocks self-approval and checks `permission`, so give the approver role its
+own `<slug>.approve` entry.
+
+## 5. Register (three one-line edits)
+
+1. `data/index.ts`: import `seed.json` as a collection.
+2. `core/permissions.ts`: add `<slug>.view` plus one entry per verb (including `<slug>.approve`).
+3. `tools/registry.ts`: add the tool to `TOOLS`. The sidebar, home card, Platform view and
+   `/tools/<slug>` route then pick it up.
+
+## 6. build.json
+
+Record wall-clock minutes from the start of the request to the tool working, rounded up.
+Set `acus` if known, otherwise `null`. Set `pr_url` once the PR exists.
+
+## Done checklist
+
+- [ ] All seven files exist in `tools/<slug>/`; each is under ~150 lines
 - [ ] Registered in `data/index.ts`, `core/permissions.ts` and `tools/registry.ts`
-- [ ] Every mutation checks permission and writes an audit event
-- [ ] Sensitive actions go through approvals; requester ≠ approver
-- [ ] SSN/DOB masked; Reveal works for allowed roles only
-- [ ] No new dependencies, database, auth or API layers
+- [ ] Every mutation calls `assertCan` and `logAudit`; reasons are required where asked
+- [ ] Sensitive actions go through `requestApproval`; the requester cannot approve
+- [ ] PII is masked; Reveal works only for allowed roles
+- [ ] `pnpm lint && pnpm build` pass; only tests the request asked for (`pnpm test`)
+- [ ] Clicked through as each demo user; the Audit Log shows the events
+- [ ] `build.json` filled in; no new dependencies, database, auth or API layers

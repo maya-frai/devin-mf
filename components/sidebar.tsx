@@ -34,6 +34,14 @@ export async function Sidebar() {
         <Link href="/audit" className={item}>
           Audit Log
         </Link>
+        <Link href="/roadmap" className={item}>
+          Roadmap
+        </Link>
+        {can(user, "tools.create") ? (
+          <Link href="/new-tool" className={item}>
+            New tool
+          </Link>
+        ) : null}
       </nav>
     </aside>
   );

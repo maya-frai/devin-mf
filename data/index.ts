@@ -1,4 +1,5 @@
 import flags from "@/tools/flags/seed.json";
+import ledgerAccounts from "@/tools/ledger/seed.json";
 import kycCases from "@/tools/kyc/seed.json";
 import payments from "@/tools/refunds/seed.json";
 
@@ -10,4 +11,5 @@ export const seedCollections: Record<string, Row[]> = {
   payments,
   kyc_cases: kycCases,
   flags,
+  ledger_accounts: ledgerAccounts,
 };

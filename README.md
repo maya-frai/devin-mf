@@ -30,10 +30,10 @@ Switch user in the header. The sidebar only shows the tools a role can use.
 
 | User | Role           | Sees / can do                                                        |
 | ---- | -------------- | -------------------------------------------------------------------- |
-| Ana  | `ops_analyst`  | Refunds: request refunds (over $500 goes to approval)                |
-| Luis | `ops_lead`     | All tools; approves refunds over $500 and prod flag changes          |
+| Ana  | `ops_analyst`  | Refunds and ledger adjustments (over $500 / $1,000 go to approval)   |
+| Luis | `ops_lead`     | All tools; approves refunds, ledger adjustments and prod flag changes; New tool page |
 | Kim  | `kyc_reviewer` | KYC queue: approve / reject / escalate, reveal SSN and DOB (audited) |
-| Eli  | `eng_admin`    | Feature flags: toggle dev/staging, request prod changes              |
+| Eli  | `eng_admin`    | Feature flags: toggle dev/staging, request prod changes; New tool page |
 
 A 60-second script: as Ana, refund $500.00 (instant) and $500.01 (needs approval). Switch to
 Luis and approve it in Approvals. As Kim, reveal an SSN. As Eli, request a prod flag change.
@@ -44,9 +44,9 @@ Finish on the Audit Log as Luis, which shows all of it.
 ```
 core/       permissions, audit, approvals, masking, store, session (shared by every tool)
 adapters/   mock connectors: payments, KYC vendor
-tools/      refunds/, kyc/, flags/ + registry.ts
-app/        shell: home, /approvals, /audit, /tools/[slug] (with a Platform view tab)
-data/       wires each tool's seed.json into the store
+tools/      refunds/, kyc/, flags/, ledger/ + registry.ts
+app/        shell: home, /approvals, /audit, /roadmap, /new-tool, /tools/[slug] (with a Platform view tab)
+data/       wires each tool's seed.json into the store; roadmap.json feeds /roadmap
 docs/       ADD_TOOL.md, the playbook Devin follows
 tests/      Vitest: self-approval, $500 refund boundary, prod flag approval
 ```

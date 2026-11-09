@@ -14,7 +14,12 @@ export const POLICY: Record<string, Role[]> = {
   "flags.toggle": ["eng_admin"],
   "flags.approve": ["eng_admin", "ops_lead"],
 
+  "ledger.view": ["ops_analyst", "ops_lead"],
+  "ledger.adjust": ["ops_analyst", "ops_lead"],
+  "ledger.approve": ["ops_lead"],
+
   "audit.view": ["ops_lead", "kyc_reviewer", "eng_admin"],
+  "tools.create": ["eng_admin", "ops_lead"],
 };
 
 export function can(user: User, action: string): boolean {
