@@ -38,7 +38,7 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
         <Link href={`/tools/${slug}`} className={tab(!platform)}>Tool</Link>
         <Link href={`/tools/${slug}?view=platform`} className={tab(platform)}>Platform view</Link>
         {can(user, "tools.create") ? (
-          <Button size="xs" variant="outline" className="mb-2 ml-auto" render={<Link href={`/build?mode=customize&tool=${slug}`} />}>
+          <Button size="xs" variant="outline" className="mb-2 ml-auto" nativeButton={false} render={<Link href={`/build?mode=customize&tool=${slug}`} />}>
             {terms.customizeTool}
           </Button>
         ) : null}
