@@ -1,21 +1,6 @@
-import { Forbidden } from "@/components/forbidden";
-import { PageTitle } from "@/components/page-title";
-import { can } from "@/core/permissions";
-import { getCurrentUser, getTerms } from "@/core/session";
-import { NewToolForm } from "./new-tool-form";
+import { redirect } from "next/navigation";
 
-export default async function NewToolPage() {
-  const [user, terms] = await Promise.all([getCurrentUser(), getTerms()]);
-  if (!can(user, "tools.create")) return <Forbidden user={user} action="tools.create" />;
-
-  return (
-    <div>
-      <PageTitle
-        title={terms.newTool}
-        user={user}
-        subtitle="Describe the tool in plain English. Paste the generated prompt into Devin; it follows docs/ADD_TOOL.md."
-      />
-      <NewToolForm />
-    </div>
-  );
+// The New tool form now lives in the "+" builder, which also covers customizing a tool.
+export default function NewToolPage() {
+  redirect("/build?mode=new");
 }

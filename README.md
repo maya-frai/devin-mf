@@ -45,6 +45,19 @@ As Luis, approve it in Approvals. As Kim, claim the next case, reveal an SSN and
 case (goes to Luis). As Eli, request a prod flag change and switch the brand to "Ledgerline (alt)".
 As Farah, open Refunds. Finish on the Audit Log as Luis.
 
+## Sidebar: tools and settings
+
+Every person sees Home, then **Tools** (the ones their job uses, in their order) and **Settings**.
+
+- **"+" next to Tools** opens a builder: describe a new tool, or a change to one of your tools, in plain
+  English. It shows what Devin will use (your role, permissions, tools, the systems behind them, the
+  rules and controls that apply), suggests ideas for your role, and writes the plan and Devin prompt.
+  Each tool page also has "Customize this tool". No API calls.
+- **Settings** show what the app and Devin use on your behalf: *Compliance & controls* (each control
+  with live evidence and the code that enforces it), *Data & connectors* (which of your tools read or
+  write which systems, and what still needs access; "Request access" goes through approvals),
+  *My access* (what you can do, approve, and what needs someone else) and, for Eli, *Customize*.
+
 ## Make it yours
 
 Most changes are config, not code. The Customize page (Eli) shows each file and writes a Devin prompt for a change.
@@ -54,7 +67,9 @@ Most changes are config, not code. The Customize page (Eli) shows each file and 
 | `config/brand.ts`        | Company name, logo, colors, neutral palette, font, corner radius, table density; two presets |
 | `config/terminology.ts`  | The client's words for things ("Refunds" or "Reversals", "Cases" or "Applications") |
 | `config/workflows.ts`    | Refund limits and approver, KYC SLA and second reviewer, flag environments needing approval, reason codes, Power Apps role mapping |
-| `config/roles.ts`        | Per role: landing page, home KPIs, sidebar order, visible tools, which view of each tool |
+| `config/roles.ts`        | Per role: job title, landing page, home KPIs, sidebar tools and settings, which view of each tool, builder ideas |
+| `config/connectors.ts`   | Systems the tools read or write, scopes, data classes, and what needs access   |
+| `config/compliance.ts`   | Controls the app enforces, frameworks, and where in the code                   |
 | `config/views/`          | Each view's widgets (KPI tiles, charts, tables, queues, approvals, activity)  |
 | `config/import-map.ts`   | Power Apps (Dataverse) column names -> app fields                             |
 
@@ -69,7 +84,7 @@ core/       permissions, audit, approvals, pii, store, importer, session (shared
 adapters/   mock connectors: payments, KYC vendor
 components/ widgets/ (KpiTile, LineChart, BarChart, WorkQueue, DataTable, ApprovalList, ActivityFeed, StatusSummary)
 tools/      refunds/, kyc/, flags/, ledger/ + registry.ts + sources.tsx (data sources views can use)
-app/        shell: home, /approvals, /audit, /customize, /roadmap, /new-tool, /tools/[slug]
+app/        shell: home, /build (the "+"), /settings/[section], /approvals, /audit, /roadmap, /tools/[slug]
 data/       imports/powerapps/*.csv, the ledger seed, roadmap.json
 docs/       ADD_TOOL.md, the playbook Devin follows
 tests/      Vitest: self-approval, $500 refund boundary and daily cap, prod flag approval

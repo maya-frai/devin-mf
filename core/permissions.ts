@@ -25,8 +25,10 @@ export const POLICY: Record<string, Role[]> = {
   "ledger.adjust": ["ops_analyst", "ops_lead"],
   "ledger.approve": [WORKFLOWS.ledger.approverRole],
 
-  "audit.view": ["ops_lead", "kyc_reviewer", "eng_admin"],
-  "tools.create": ["eng_admin", "ops_lead"],
+  "audit.view": ["ops_lead", "kyc_reviewer", "eng_admin", "finance"],
+  "tools.create": ["ops_analyst", "ops_lead", "kyc_reviewer", "eng_admin", "finance"],
+  "access.request": ["ops_analyst", "ops_lead", "kyc_reviewer", "eng_admin", "finance"],
+  "access.approve": ["eng_admin", "ops_lead"],
   "platform.customize": ["eng_admin"],
   "brand.switch": ["eng_admin"],
 };

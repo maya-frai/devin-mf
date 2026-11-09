@@ -5,6 +5,7 @@ import { PageTitle } from "@/components/page-title";
 import { PlatformView } from "@/components/platform-view";
 import { can } from "@/core/permissions";
 import { ImportBanner } from "@/components/import-banner";
+import { Button } from "@/components/ui/button";
 import { getCurrentUser, getTerms, toolName } from "@/core/session";
 import { importCounts, trackOpen } from "@/core/store";
 import { cn } from "@/lib/utils";
@@ -36,6 +37,11 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
       <nav className="mb-6 flex gap-6 border-b text-sm">
         <Link href={`/tools/${slug}`} className={tab(!platform)}>Tool</Link>
         <Link href={`/tools/${slug}?view=platform`} className={tab(platform)}>Platform view</Link>
+        {can(user, "tools.create") ? (
+          <Button size="xs" variant="outline" className="mb-2 ml-auto" render={<Link href={`/build?mode=customize&tool=${slug}`} />}>
+            {terms.customizeTool}
+          </Button>
+        ) : null}
       </nav>
       {platform ? <PlatformView tool={tool} /> : <Page query={query} />}
     </div>

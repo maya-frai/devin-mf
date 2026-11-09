@@ -11,6 +11,11 @@
       "Approvals",
       "Adapter",
       "Money movement"
+    ],
+    "roles": [
+      "ops_analyst",
+      "ops_lead",
+      "finance"
     ]
   },
   {
@@ -25,6 +30,10 @@
       "Approvals",
       "PII masking",
       "Adapter"
+    ],
+    "roles": [
+      "kyc_reviewer",
+      "ops_lead"
     ]
   },
   {
@@ -39,6 +48,10 @@
       "Approvals",
       "PII masking",
       "Adapter"
+    ],
+    "roles": [
+      "kyc_reviewer",
+      "ops_lead"
     ]
   },
   {
@@ -52,6 +65,11 @@
       "Audit",
       "PII masking",
       "Adapter"
+    ],
+    "roles": [
+      "ops_analyst",
+      "kyc_reviewer",
+      "ops_lead"
     ]
   },
   {
@@ -66,6 +84,10 @@
       "Approvals",
       "Adapter",
       "Money movement"
+    ],
+    "roles": [
+      "finance",
+      "ops_lead"
     ]
   },
   {
@@ -80,6 +102,10 @@
       "Approvals",
       "PII masking",
       "Adapter"
+    ],
+    "roles": [
+      "kyc_reviewer",
+      "ops_lead"
     ]
   },
   {
@@ -92,6 +118,9 @@
       "Roles",
       "Audit",
       "Approvals"
+    ],
+    "roles": [
+      "eng_admin"
     ]
   },
   {
@@ -105,6 +134,11 @@
       "Audit",
       "Approvals",
       "Money movement"
+    ],
+    "roles": [
+      "ops_analyst",
+      "ops_lead",
+      "finance"
     ]
   }
 ]

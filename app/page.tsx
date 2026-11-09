@@ -35,7 +35,7 @@ export default async function Home() {
 
   return (
     <div className="space-y-8">
-      <PageTitle title={`Good ${hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening"}, ${user.name}`} subtitle={`You're signed in as ${user.role}.`} user={user} />
+      <PageTitle title={`Good ${hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening"}, ${user.name}`} subtitle={`${ROLES[user.role].title} · ${ROLES[user.role].team}`} user={user} />
       <KpiTiles metrics={kpis} />
       <section>
         <h2 className="mb-3 text-lg font-semibold">{terms.recentApps}</h2>

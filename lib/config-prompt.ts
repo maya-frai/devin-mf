@@ -5,6 +5,8 @@ export const CONFIG_AREAS = [
   { id: "workflows", label: "Workflows (limits, SLAs, approvers, reason codes)", file: "config/workflows.ts" },
   { id: "roles", label: "Roles (home KPIs, sidebar, which view per tool)", file: "config/roles.ts" },
   { id: "views", label: "Views (widgets on a tool page)", file: "config/views/" },
+  { id: "connectors", label: "Connectors (systems and access)", file: "config/connectors.ts" },
+  { id: "compliance", label: "Compliance controls", file: "config/compliance.ts" },
   { id: "imports", label: "Power Apps import mapping", file: "config/import-map.ts" },
 ];
 
