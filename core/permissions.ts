@@ -1,11 +1,20 @@
 import type { Role, User } from "./users";
 
-// Single source of truth for who can do what (replaces Power Apps security roles).
-// Tools add their own "<tool>.<verb>" actions here. Unknown actions are denied.
+// Who can do what. One table for every tool (replaces Power Apps security roles).
 export const POLICY: Record<string, Role[]> = {
+  "refunds.view": ["ops_analyst", "ops_lead"],
+  "refunds.request": ["ops_analyst", "ops_lead"],
+  "refunds.approve": ["ops_lead"],
+
+  "kyc.view": ["kyc_reviewer", "ops_lead"],
+  "kyc.decide": ["kyc_reviewer"],
+  "pii.reveal": ["kyc_reviewer"],
+
+  "flags.view": ["eng_admin", "ops_lead"],
+  "flags.toggle": ["eng_admin"],
+  "flags.approve": ["eng_admin", "ops_lead"],
+
   "audit.view": ["ops_lead", "kyc_reviewer", "eng_admin"],
-  "approvals.decide": ["ops_lead", "eng_admin"],
-  "pii.reveal": ["ops_lead", "kyc_reviewer"],
 };
 
 export function can(user: User, action: string): boolean {
@@ -13,7 +22,5 @@ export function can(user: User, action: string): boolean {
 }
 
 export function assertCan(user: User, action: string): void {
-  if (!can(user, action)) {
-    throw new Error(`${user.name} (${user.role}) is not allowed to ${action}`);
-  }
+  if (!can(user, action)) throw new Error(`${user.name} cannot ${action}`);
 }

@@ -1,0 +1,282 @@
+[
+  {
+    "id": "kyc_2001",
+    "customer": "Daniel Achterberg",
+    "country": "NL",
+    "ssn": "910-10-2234",
+    "dob": "1960-01-01",
+    "documentType": "passport",
+    "riskScore": 23,
+    "riskFactors": [
+      "PEP match"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-01"
+  },
+  {
+    "id": "kyc_2002",
+    "customer": "Fatima Al-Sayed",
+    "country": "AE",
+    "ssn": "917-13-2655",
+    "dob": "1963-06-08",
+    "documentType": "drivers_license",
+    "riskScore": 60,
+    "riskFactors": [
+      "Sanctions near-match"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-02"
+  },
+  {
+    "id": "kyc_2003",
+    "customer": "Grace Okonkwo",
+    "country": "NG",
+    "ssn": "924-16-3076",
+    "dob": "1966-11-15",
+    "documentType": "national_id",
+    "riskScore": 97,
+    "riskFactors": [
+      "High-risk jurisdiction"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-03"
+  },
+  {
+    "id": "kyc_2004",
+    "customer": "Ivan Petrov",
+    "country": "CY",
+    "ssn": "931-19-3497",
+    "dob": "1969-04-22",
+    "documentType": "passport",
+    "riskScore": 34,
+    "riskFactors": [
+      "Document mismatch",
+      "High-risk jurisdiction"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-04"
+  },
+  {
+    "id": "kyc_2005",
+    "customer": "Julia Santos",
+    "country": "BR",
+    "ssn": "938-22-3918",
+    "dob": "1972-09-01",
+    "documentType": "drivers_license",
+    "riskScore": 71,
+    "riskFactors": [
+      "Rapid account funding"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-05"
+  },
+  {
+    "id": "kyc_2006",
+    "customer": "Kenji Watanabe",
+    "country": "JP",
+    "ssn": "945-25-4339",
+    "dob": "1975-02-08",
+    "documentType": "national_id",
+    "riskScore": 8,
+    "riskFactors": [
+      "Address unverified"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-06"
+  },
+  {
+    "id": "kyc_2007",
+    "customer": "Laila Rahimi",
+    "country": "AF",
+    "ssn": "952-28-4760",
+    "dob": "1978-07-15",
+    "documentType": "passport",
+    "riskScore": 45,
+    "riskFactors": [
+      "High-risk jurisdiction"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-07"
+  },
+  {
+    "id": "kyc_2008",
+    "customer": "Marek Novak",
+    "country": "CZ",
+    "ssn": "959-31-5181",
+    "dob": "1981-12-22",
+    "documentType": "drivers_license",
+    "riskScore": 82,
+    "riskFactors": [
+      "Selfie liveness low"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-08"
+  },
+  {
+    "id": "kyc_2009",
+    "customer": "Nina Johansson",
+    "country": "SE",
+    "ssn": "966-34-5602",
+    "dob": "1984-05-01",
+    "documentType": "national_id",
+    "riskScore": 19,
+    "riskFactors": [
+      "PEP match"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-01"
+  },
+  {
+    "id": "kyc_2010",
+    "customer": "Oscar Delgado",
+    "country": "MX",
+    "ssn": "973-37-6023",
+    "dob": "1987-10-08",
+    "documentType": "passport",
+    "riskScore": 56,
+    "riskFactors": [
+      "Sanctions near-match"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-02"
+  },
+  {
+    "id": "kyc_2011",
+    "customer": "Paula Ricci",
+    "country": "IT",
+    "ssn": "980-40-6444",
+    "dob": "1990-03-15",
+    "documentType": "drivers_license",
+    "riskScore": 93,
+    "riskFactors": [
+      "High-risk jurisdiction"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-03"
+  },
+  {
+    "id": "kyc_2012",
+    "customer": "Quentin Moreau",
+    "country": "FR",
+    "ssn": "987-43-6865",
+    "dob": "1993-08-22",
+    "documentType": "national_id",
+    "riskScore": 30,
+    "riskFactors": [
+      "Document mismatch"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-04"
+  },
+  {
+    "id": "kyc_2013",
+    "customer": "Rania Haddad",
+    "country": "LB",
+    "ssn": "994-46-7286",
+    "dob": "1996-01-01",
+    "documentType": "passport",
+    "riskScore": 67,
+    "riskFactors": [
+      "Rapid account funding"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-05"
+  },
+  {
+    "id": "kyc_2014",
+    "customer": "Stefan Ionescu",
+    "country": "RO",
+    "ssn": "911-49-7707",
+    "dob": "1999-06-08",
+    "documentType": "drivers_license",
+    "riskScore": 4,
+    "riskFactors": [
+      "Address unverified"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-06"
+  },
+  {
+    "id": "kyc_2015",
+    "customer": "Tara O'Neill",
+    "country": "IE",
+    "ssn": "918-52-8128",
+    "dob": "1962-11-15",
+    "documentType": "national_id",
+    "riskScore": 41,
+    "riskFactors": [],
+    "status": "open",
+    "submittedAt": "2026-11-07"
+  },
+  {
+    "id": "kyc_2016",
+    "customer": "Umar Farouk",
+    "country": "PK",
+    "ssn": "925-55-8549",
+    "dob": "1965-04-22",
+    "documentType": "passport",
+    "riskScore": 78,
+    "riskFactors": [
+      "Selfie liveness low"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-08"
+  },
+  {
+    "id": "kyc_2017",
+    "customer": "Vera Kuznetsova",
+    "country": "RU",
+    "ssn": "932-58-8970",
+    "dob": "1968-09-01",
+    "documentType": "drivers_license",
+    "riskScore": 15,
+    "riskFactors": [
+      "PEP match",
+      "High-risk jurisdiction"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-01"
+  },
+  {
+    "id": "kyc_2018",
+    "customer": "William Grant",
+    "country": "US",
+    "ssn": "939-61-9391",
+    "dob": "1971-02-08",
+    "documentType": "national_id",
+    "riskScore": 52,
+    "riskFactors": [
+      "Sanctions near-match"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-02"
+  },
+  {
+    "id": "kyc_2019",
+    "customer": "Ximena Torres",
+    "country": "CO",
+    "ssn": "946-64-9812",
+    "dob": "1974-07-15",
+    "documentType": "passport",
+    "riskScore": 89,
+    "riskFactors": [
+      "High-risk jurisdiction"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-03"
+  },
+  {
+    "id": "kyc_2020",
+    "customer": "Yusuf Demir",
+    "country": "TR",
+    "ssn": "953-67-1233",
+    "dob": "1977-12-22",
+    "documentType": "drivers_license",
+    "riskScore": 26,
+    "riskFactors": [
+      "Document mismatch"
+    ],
+    "status": "open",
+    "submittedAt": "2026-11-04"
+  }
+]

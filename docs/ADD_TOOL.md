@@ -15,10 +15,11 @@ It replaces the Power Apps builder, and its conventions replace the admin center
 
 | File          | Purpose                                                              |
 | ------------- | -------------------------------------------------------------------- |
-| `manifest.ts` | `ToolManifest`: slug, name, description, which Power App it replaces |
+| `manifest.ts` | `ToolManifest`: slug, name, description, what it replaces, `uses` (Platform view) |
 | `seed.json`   | 15–30 synthetic rows, each with a unique `id`                        |
-| `page.tsx`    | Server component; reads with `list()` and calls `can()`              |
-| `actions.ts`  | `"use server"` mutations (pattern below)                             |
+| `logic.ts`    | Plain functions taking a `user`: permission, mutation, audit (tested) |
+| `page.tsx`    | Server component; reads data and calls `can()` to hide buttons       |
+| `actions.ts`  | Thin `"use server"` wrappers: `getCurrentUser()` → logic → revalidate |
 | `build.json`  | `{ "minutes": 0, "acus": 0, "pr_url": "" }`, filled in after the PR  |
 | `index.ts`    | Puts together the `ToolDefinition` (manifest, build, Page, onApproved) |
 
@@ -46,36 +47,29 @@ The header nav, home page card and `/tools/<slug>` route then pick it up automat
 - Keep each file under about 150 lines. Use only the existing stack. Ask before adding any
   dependency. Write only the tests the request asks for (Vitest).
 
-## Action pattern
+## Logic pattern (see `tools/refunds/logic.ts`)
 
 ```ts
-"use server";
-import { revalidatePath } from "next/cache";
-import { assertCan, getCurrentUser, logAudit, requestApproval, getRow } from "@/core";
-
-export async function requestRefund(id: string) {
-  const user = await getCurrentUser();
+export async function requestRefund(user: User, paymentId: string, reason: string) {
   assertCan(user, "refunds.request");
-  const row = getRow("refunds", id);
-  requestApproval(user, {
-    tool: "refunds",
-    action: "refunds.issue",
-    target: `refunds/${id}`,
-    summary: `Refund ${row?.amount} to ${row?.customerName}`,
-    payload: { id },
+  const payment = getPayment(paymentId);                 // adapter
+  logAudit(user, "refunds.requested", `payments/${paymentId}`, { reason });
+  if (payment.amountCents <= AUTO_REFUND_LIMIT_CENTS) return completeRefund(user, paymentId, reason);
+  return requestApproval(user, {
+    tool: "refunds", action: "refunds.issue", target: `payments/${paymentId}`,
+    summary: `Refund to ${payment.customer}`, permission: "refunds.approve", payload: { paymentId, reason },
   });
-  revalidatePath("/", "layout");
 }
 ```
 
 ## 5. Finish
 
-- `npm run build` passes, then click through the tool as each of Ana, Luis, Kim and Eli.
+- `pnpm build` passes, then click through the tool as each of Ana, Luis, Kim and Eli.
 - Open a PR, then put the minutes, ACUs and PR URL in `build.json`.
 
 ## Checklist
 
-- [ ] `tools/<slug>/` has a manifest, page, actions, seed (15–30 rows), build.json and index
+- [ ] `tools/<slug>/` has manifest, logic, page, actions, seed (15–30 rows), build.json and index
 - [ ] Registered in `data/index.ts`, `core/permissions.ts` and `tools/registry.ts`
 - [ ] Every mutation checks permission and writes an audit event
 - [ ] Sensitive actions go through approvals; requester ≠ approver

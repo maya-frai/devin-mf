@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { logAudit } from "./audit";
-import { MASKABLE_FIELDS, type MaskableField } from "./mask";
+import type { PiiField } from "./mask";
 import { can } from "./permissions";
 import { getCurrentUser, USER_COOKIE } from "./session";
 import { getRow, resetStore } from "./store";
@@ -18,25 +18,22 @@ export async function switchUser(id: string): Promise<void> {
 export async function resetData(): Promise<void> {
   const user = await getCurrentUser();
   resetStore();
-  logAudit(user, "data.reset");
+  logAudit(user, "data.reset", "store");
   revalidatePath("/", "layout");
 }
-
-export type RevealResult = { value: string } | { error: string };
 
 export async function revealPii(
   collection: string,
   id: string,
-  field: MaskableField,
-): Promise<RevealResult> {
-  if (!MASKABLE_FIELDS.includes(field)) return { error: `${field} is not PII` };
+  field: PiiField,
+): Promise<{ value?: string; error?: string }> {
   const user = await getCurrentUser();
+  const target = `${collection}/${id}`;
+  if (!["ssn", "dob"].includes(field)) return { error: "Not a PII field" };
   if (!can(user, "pii.reveal")) {
-    logAudit(user, "pii.reveal_denied", `${collection}/${id}`, { field });
-    return { error: `${user.name} (${user.role}) cannot reveal PII` };
+    logAudit(user, "pii.reveal_denied", target, { field });
+    return { error: "Not permitted" };
   }
-  const value = getRow(collection, id)?.[field];
-  if (typeof value !== "string") return { error: "Record not found" };
-  logAudit(user, "pii.revealed", `${collection}/${id}`, { field });
-  return { value };
+  logAudit(user, "pii.revealed", target, { field });
+  return { value: String(getRow(collection, id)[field]) };
 }

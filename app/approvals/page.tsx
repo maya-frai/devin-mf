@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { canDecide, listApprovals } from "@/core/approvals";
+import { blockedReason, listApprovals } from "@/core/approvals";
 import { getCurrentUser } from "@/core/session";
 import { getUser } from "@/core/users";
 import { approveAction, rejectAction } from "./actions";
@@ -35,12 +35,12 @@ export default async function ApprovalsPage() {
             {approvals.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={5} className="pl-4 text-muted-foreground">
-                  Nothing to approve. Tools create requests with requestApproval().
+                  Nothing here yet. Refunds over $500 and prod flag changes land here.
                 </TableCell>
               </TableRow>
             ) : (
               approvals.map((a) => {
-                const blocked = canDecide(user, a);
+                const blocked = blockedReason(user, a);
                 return (
                   <TableRow key={a.id}>
                     <TableCell className="pl-4 font-medium">{a.summary}</TableCell>

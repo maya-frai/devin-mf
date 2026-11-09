@@ -18,4 +18,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Stack: Next.js App Router, TypeScript, Tailwind, shadcn/ui. No database.
 - Do not add: a database, Docker, real auth, CI, custom lint rules, Storybook, dark mode, extra
   API layers or state libraries. Leave a TODO instead. Ask before adding any dependency.
-- Keep files under about 150 lines. Write only the tests a task asks for (Vitest).
+- Keep files under about 150 lines. Write only the tests a task asks for (Vitest, `pnpm test`).
+- Package manager: pnpm.

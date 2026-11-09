@@ -1,15 +1,28 @@
-// Mock payments connector (replaces a Power Apps custom connector).
-// TODO: swap for the real PSP client; keep the same function signatures.
-export type RefundResult = { refundId: string; status: "succeeded" | "failed" };
+import { getRow, list, type Row } from "@/core/store";
 
-export async function issueRefund(input: {
-  paymentId: string;
+// Mock payments connector (replaces a Power Apps custom connector).
+// TODO: swap for the real PSP client behind these same functions.
+export type Payment = Row & {
+  customer: string;
+  email: string;
   amountCents: number;
   currency: string;
-}): Promise<RefundResult> {
-  const ok = input.amountCents > 0;
-  return {
-    refundId: `re_${input.paymentId.slice(-4)}${Date.now().toString(36).slice(-4)}`,
-    status: ok ? "succeeded" : "failed",
-  };
+  method: string;
+  createdAt: string;
+  status: "settled" | "refunded";
+  refundId?: string;
+  refundReason?: string;
+};
+
+export function listPayments(): Payment[] {
+  return list<Payment>("payments");
+}
+
+export function getPayment(id: string): Payment {
+  return getRow<Payment>("payments", id);
+}
+
+export async function refundPayment(id: string): Promise<{ refundId: string }> {
+  getPayment(id);
+  return { refundId: `re_${id.slice(-4)}${Date.now().toString(36).slice(-4)}` };
 }

@@ -40,10 +40,10 @@ export default async function AuditPage() {
                     {new Date(e.at).toLocaleTimeString("en-US")}
                   </TableCell>
                   <TableCell>
-                    {e.actorName} <Badge variant="outline">{e.role}</Badge>
+                    {e.actor} <Badge variant="outline">{e.role}</Badge>
                   </TableCell>
                   <TableCell className="font-mono text-xs">{e.action}</TableCell>
-                  <TableCell className="font-mono text-xs">{e.target ?? "—"}</TableCell>
+                  <TableCell className="font-mono text-xs">{e.target}</TableCell>
                   <TableCell className="max-w-xs truncate font-mono text-xs text-muted-foreground">
                     {e.details ? JSON.stringify(e.details) : ""}
                   </TableCell>

@@ -1,77 +1,53 @@
 import { logAudit } from "./audit";
-import { assertCan } from "./permissions";
+import { can } from "./permissions";
 import { db, newId } from "./store";
-import type { Approval, ApprovalStatus } from "./types";
+import type { Approval } from "./types";
 import type { User } from "./users";
 
 // Two-person approvals (replaces Power Automate approval flows).
-export type ApprovalRequest = {
-  tool: string;
-  action: string;
-  target: string;
-  summary: string;
-  payload?: Record<string, unknown>;
-  /** Permission the approver needs. Defaults to "approvals.decide". */
-  permission?: string;
-};
-
-export function requestApproval(user: User, req: ApprovalRequest): Approval {
+export function requestApproval(
+  user: User,
+  req: Pick<Approval, "tool" | "action" | "target" | "summary" | "permission" | "payload">,
+): Approval {
   const approval: Approval = {
+    ...req,
     id: newId("apr"),
-    tool: req.tool,
-    action: req.action,
-    target: req.target,
-    summary: req.summary,
-    payload: req.payload ?? {},
-    permission: req.permission ?? "approvals.decide",
     status: "pending",
     requestedBy: user.id,
     requestedAt: new Date().toISOString(),
   };
   db().approvals.unshift(approval);
-  logAudit(user, "approval.requested", approval.id, {
-    action: req.action,
-    target: req.target,
-  });
+  logAudit(user, "approval.requested", req.target, { action: req.action, summary: req.summary });
   return approval;
 }
 
-export function canDecide(user: User, approval: Approval): string | null {
+// Returns why `user` can't decide, or null if they can.
+export function blockedReason(user: User, approval: Approval): string | null {
   if (approval.status !== "pending") return "Already decided";
-  if (approval.requestedBy === user.id) return "Approver must differ from requester";
-  try {
-    assertCan(user, approval.permission);
-  } catch {
-    return `Needs ${approval.permission}`;
-  }
+  if (approval.requestedBy === user.id) return "You can't approve your own request";
+  if (!can(user, approval.permission)) return `Needs ${approval.permission}`;
   return null;
 }
 
-function decide(user: User, id: string, status: ApprovalStatus): Approval {
+function decide(user: User, id: string, status: "approved" | "rejected"): Approval {
   const approval = db().approvals.find((a) => a.id === id);
   if (!approval) throw new Error(`Approval ${id} not found`);
-  const blocked = canDecide(user, approval);
+  const blocked = blockedReason(user, approval);
   if (blocked) throw new Error(blocked);
+
   approval.status = status;
   approval.decidedBy = user.id;
-  approval.decidedAt = new Date().toISOString();
-  logAudit(user, `approval.${status}`, approval.id, {
-    action: approval.action,
-    target: approval.target,
-    requestedBy: approval.requestedBy,
-  });
+  logAudit(user, `approval.${status}`, approval.target, { action: approval.action });
   return approval;
 }
 
-export function approve(user: User, id: string): Approval {
-  return decide(user, id, "approved");
+export const approve = (user: User, id: string) => decide(user, id, "approved");
+export const reject = (user: User, id: string) => decide(user, id, "rejected");
+
+export function listApprovals(): Approval[] {
+  return db().approvals;
 }
 
-export function reject(user: User, id: string): Approval {
-  return decide(user, id, "rejected");
-}
-
-export function listApprovals(status?: ApprovalStatus): Approval[] {
-  const all = db().approvals;
-  return status ? all.filter((a) => a.status === status) : all;
+export function pendingApprovalFor(target: string): Approval | undefined {
+  return db().approvals.find((a) => a.status === "pending" && a.target === target);
 }

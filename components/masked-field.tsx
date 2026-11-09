@@ -2,38 +2,37 @@
 
 import { useState, useTransition } from "react";
 import { revealPii } from "@/core/actions";
-import { mask, type MaskableField } from "@/core/mask";
+import type { PiiField } from "@/core/mask";
 import { Button } from "@/components/ui/button";
 
-// Shows SSN/DOB masked. Reveal is permission-checked and audited on the server.
-// The raw value never reaches the browser until Reveal succeeds.
+// Receives only the masked value. The raw value is fetched on Reveal,
+// which the server permission-checks and audits.
 export function MaskedField(props: {
   collection: string;
   id: string;
-  field: MaskableField;
-  last4?: string;
+  field: PiiField;
+  masked: string;
+  canReveal: boolean;
 }) {
-  const [value, setValue] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [value, setValue] = useState<string>();
+  const [error, setError] = useState<string>();
   const [pending, startTransition] = useTransition();
-  const masked = props.field === "ssn" ? `***-**-${props.last4 ?? "****"}` : mask("dob", "");
 
-  function onReveal() {
+  const reveal = () =>
     startTransition(async () => {
       const res = await revealPii(props.collection, props.id, props.field);
-      if ("value" in res) setValue(res.value);
-      else setError(res.error);
+      setValue(res.value);
+      setError(res.error);
     });
-  }
 
   return (
-    <span className="inline-flex items-center gap-2 font-mono text-sm">
-      {value ?? masked}
-      {value ? null : (
-        <Button variant="ghost" size="xs" disabled={pending} onClick={onReveal} title={error ?? undefined}>
-          {error ? "Not permitted" : "Reveal"}
+    <span className="inline-flex items-center gap-1 font-mono text-xs">
+      {value ?? props.masked}
+      {props.canReveal && !value ? (
+        <Button variant="ghost" size="xs" disabled={pending} onClick={reveal}>
+          {error ?? "Reveal"}
         </Button>
-      )}
+      ) : null}
     </span>
   );
 }

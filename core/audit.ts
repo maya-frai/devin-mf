@@ -6,14 +6,13 @@ import type { User } from "./users";
 export function logAudit(
   user: User,
   action: string,
-  target?: string,
+  target: string,
   details?: Record<string, unknown>,
 ): AuditEvent {
   const event: AuditEvent = {
     id: newId("evt"),
     at: new Date().toISOString(),
-    actorId: user.id,
-    actorName: user.name,
+    actor: user.name,
     role: user.role,
     action,
     target,

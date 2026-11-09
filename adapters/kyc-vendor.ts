@@ -1,25 +1,28 @@
-// Mock KYC/AML vendor connector (sanctions, PEP and document checks).
-// TODO: swap for the real vendor SDK; keep the same function signatures.
-export type ScreeningResult = {
-  provider: "MockKYC";
-  sanctionsHit: boolean;
-  pepHit: boolean;
-  score: number;
+import { getRow, list, updateRow, type Row } from "@/core/store";
+
+// Mock KYC/AML vendor connector (identity, sanctions and PEP screening).
+// TODO: swap for the real vendor SDK behind these same functions.
+export type KycCase = Row & {
+  customer: string;
+  country: string;
+  ssn: string;
+  dob: string;
+  documentType: string;
+  riskScore: number;
+  riskFactors: string[];
+  status: "open" | "approved" | "rejected" | "escalated";
+  submittedAt: string;
+  decisionReason?: string;
 };
 
-function hash(s: string): number {
-  return [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 997, 7);
+export function listCases(): KycCase[] {
+  return list<KycCase>("kyc_cases");
 }
 
-export async function runScreening(input: {
-  name: string;
-  country: string;
-}): Promise<ScreeningResult> {
-  const h = hash(`${input.name}|${input.country}`);
-  return {
-    provider: "MockKYC",
-    sanctionsHit: h % 11 === 0,
-    pepHit: h % 7 === 0,
-    score: h % 100,
-  };
+export function getCase(id: string): KycCase {
+  return getRow<KycCase>("kyc_cases", id);
+}
+
+export async function submitDecision(id: string, status: KycCase["status"], reason: string) {
+  return updateRow<KycCase>("kyc_cases", id, { status, decisionReason: reason });
 }
