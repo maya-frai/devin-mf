@@ -1,0 +1,202 @@
+[
+  {
+    "id": "cus_001",
+    "name": "Maya Okafor",
+    "email": "maya.okafor@example.com",
+    "country": "US",
+    "riskTier": "low",
+    "ssn": "910-40-1000",
+    "dob": "1965-01-01",
+    "createdAt": "2025-01-03"
+  },
+  {
+    "id": "cus_002",
+    "name": "Jonas Lindqvist",
+    "email": "jonas.lindqvist@example.com",
+    "country": "US",
+    "riskTier": "low",
+    "ssn": "913-42-1377",
+    "dob": "1972-06-12",
+    "createdAt": "2025-02-04"
+  },
+  {
+    "id": "cus_003",
+    "name": "Priya Raman",
+    "email": "priya.raman@example.com",
+    "country": "US",
+    "riskTier": "medium",
+    "ssn": "916-44-1754",
+    "dob": "1979-11-23",
+    "createdAt": "2025-03-05"
+  },
+  {
+    "id": "cus_004",
+    "name": "Diego Alvarez",
+    "email": "diego.alvarez@example.com",
+    "country": "GB",
+    "riskTier": "low",
+    "ssn": "919-46-2131",
+    "dob": "1986-04-06",
+    "createdAt": "2025-04-06"
+  },
+  {
+    "id": "cus_005",
+    "name": "Aisha Bello",
+    "email": "aisha.bello@example.com",
+    "country": "DE",
+    "riskTier": "high",
+    "ssn": "922-48-2508",
+    "dob": "1993-09-17",
+    "createdAt": "2025-05-07"
+  },
+  {
+    "id": "cus_006",
+    "name": "Tom Hughes",
+    "email": "tom.hughes@example.com",
+    "country": "US",
+    "riskTier": "low",
+    "ssn": "925-50-2885",
+    "dob": "1965-02-28",
+    "createdAt": "2025-06-08"
+  },
+  {
+    "id": "cus_007",
+    "name": "Lena Schmidt",
+    "email": "lena.schmidt@example.com",
+    "country": "NG",
+    "riskTier": "medium",
+    "ssn": "928-52-3262",
+    "dob": "1972-07-11",
+    "createdAt": "2025-07-09"
+  },
+  {
+    "id": "cus_008",
+    "name": "Kofi Mensah",
+    "email": "kofi.mensah@example.com",
+    "country": "US",
+    "riskTier": "low",
+    "ssn": "931-54-3639",
+    "dob": "1979-12-22",
+    "createdAt": "2025-08-10"
+  },
+  {
+    "id": "cus_009",
+    "name": "Sofia Rossi",
+    "email": "sofia.rossi@example.com",
+    "country": "IT",
+    "riskTier": "low",
+    "ssn": "934-56-4016",
+    "dob": "1986-05-05",
+    "createdAt": "2025-09-11"
+  },
+  {
+    "id": "cus_010",
+    "name": "Ravi Patel",
+    "email": "ravi.patel@example.com",
+    "country": "IN",
+    "riskTier": "medium",
+    "ssn": "937-58-4393",
+    "dob": "1993-10-16",
+    "createdAt": "2025-10-12"
+  },
+  {
+    "id": "cus_011",
+    "name": "Hana Sato",
+    "email": "hana.sato@example.com",
+    "country": "JP",
+    "riskTier": "low",
+    "ssn": "940-60-4770",
+    "dob": "1965-03-27",
+    "createdAt": "2025-11-13"
+  },
+  {
+    "id": "cus_012",
+    "name": "Marco Bianchi",
+    "email": "marco.bianchi@example.com",
+    "country": "US",
+    "riskTier": "low",
+    "ssn": "943-62-5147",
+    "dob": "1972-08-10",
+    "createdAt": "2025-12-14"
+  },
+  {
+    "id": "cus_013",
+    "name": "Nadia Haddad",
+    "email": "nadia.haddad@example.com",
+    "country": "AE",
+    "riskTier": "high",
+    "ssn": "946-64-5524",
+    "dob": "1979-01-21",
+    "createdAt": "2025-01-15"
+  },
+  {
+    "id": "cus_014",
+    "name": "Owen Brennan",
+    "email": "owen.brennan@example.com",
+    "country": "IE",
+    "riskTier": "low",
+    "ssn": "949-66-5901",
+    "dob": "1986-06-04",
+    "createdAt": "2025-02-16"
+  },
+  {
+    "id": "cus_015",
+    "name": "Yuki Tanaka",
+    "email": "yuki.tanaka@example.com",
+    "country": "US",
+    "riskTier": "medium",
+    "ssn": "952-68-6278",
+    "dob": "1993-11-15",
+    "createdAt": "2025-03-17"
+  },
+  {
+    "id": "cus_016",
+    "name": "Carlos Mendes",
+    "email": "carlos.mendes@example.com",
+    "country": "BR",
+    "riskTier": "low",
+    "ssn": "955-70-6655",
+    "dob": "1965-04-26",
+    "createdAt": "2025-04-18"
+  },
+  {
+    "id": "cus_017",
+    "name": "Ingrid Berg",
+    "email": "ingrid.berg@example.com",
+    "country": "SE",
+    "riskTier": "low",
+    "ssn": "958-72-7032",
+    "dob": "1972-09-09",
+    "createdAt": "2025-05-19"
+  },
+  {
+    "id": "cus_018",
+    "name": "Samir Khan",
+    "email": "samir.khan@example.com",
+    "country": "US",
+    "riskTier": "medium",
+    "ssn": "961-74-7409",
+    "dob": "1979-02-20",
+    "createdAt": "2025-06-20"
+  },
+  {
+    "id": "cus_019",
+    "name": "Elena Popescu",
+    "email": "elena.popescu@example.com",
+    "country": "RO",
+    "riskTier": "low",
+    "ssn": "964-76-7786",
+    "dob": "1986-07-03",
+    "createdAt": "2025-07-21"
+  },
+  {
+    "id": "cus_020",
+    "name": "Felix Wagner",
+    "email": "felix.wagner@example.com",
+    "country": "DE",
+    "riskTier": "high",
+    "ssn": "967-78-8163",
+    "dob": "1993-12-14",
+    "createdAt": "2025-08-22"
+  }
+]
