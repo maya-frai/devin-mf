@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ROLES } from "@/config/roles";
 import { WORKFLOWS } from "@/config/workflows";
 import { usage, usesDraft, type DraftTool } from "@/core/drafts";
 import { USERS, type User } from "@/core/users";
@@ -15,7 +16,7 @@ export function Adoption({ draft, user }: { draft: DraftTool; user: User }) {
     { title: "Built", detail: `by ${name(draft.createdBy)} from a plain-English request`, done: true },
     { title: "Used", detail: `${u.actions} of ${minActions} actions · ${u.opens} opens by ${u.viewers} people`, done: u.actions >= minActions },
     { title: "Adopted", detail: `${u.users} of ${minAdopters} people: ${[draft.createdBy, ...draft.adoptedBy].map(name).join(", ")}`, done: u.users >= minAdopters },
-    { title: "Reviewed & published", detail: draft.status === "published" ? `Permanent tool for every ${draft.role}` : draft.status === "in_review" ? `Waiting on ${WORKFLOWS.adoption.publishApproverRole} review` : `${WORKFLOWS.adoption.publishApproverRole} reviews the PR`, done: draft.status === "published" },
+    { title: "Reviewed & published", detail: draft.status === "published" ? `Permanent tool for every ${ROLES[draft.role].title}` : draft.status === "in_review" ? `Waiting on ${WORKFLOWS.adoption.publishApproverRole} review` : `${WORKFLOWS.adoption.publishApproverRole} reviews the PR`, done: draft.status === "published" },
   ];
   const mine = usesDraft(user, draft);
   return (

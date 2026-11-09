@@ -39,7 +39,7 @@ export const ROLES: Record<Role, RoleConfig> = {
     tools: { refunds: { view: "refunds/finance" }, ledger: { view: "ledger/default" } },
     suggestions: [
       { mode: "customize", tool: "refunds", text: "Add refunds by payment method (card vs ACH) to my dashboard" },
-      { mode: "new", text: "Payout reconciliation: match payouts to the bank statement and flag breaks over $50" },
+      { mode: "new", text: "Month-end close checklist: confirm each close task with a reason; signing off adjustments over $1,000 needs ops lead approval" },
     ],
   },
   ops_analyst: {
