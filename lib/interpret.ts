@@ -58,10 +58,21 @@ const ROLE_WORDS: [RegExp, string][] = [
   [/lead|manager|head|supervisor/i, "ops_lead"],
 ];
 
+// "approve" also matches approves/approved/approving, "flag" matches flagged/flagging; not "approval".
+const verbAt = (text: string, v: string) => {
+  const stem = v.endsWith("e") ? v.slice(0, -1) : v;
+  const ing = v.endsWith("e") ? `${stem}ing` : /[aeiou][bdgmnpt]$/.test(v) ? `${v}${v.at(-1)}ing|${v}${v.at(-1)}ed` : `${v}ing`;
+  return text.search(new RegExp(`\\b(?:${v}|${v}s|${stem}ed|${ing})\\b`, "i"));
+};
+
 export function interpretNew(name: string, request: string): DraftSpec {
   const text = `${name} ${request}`;
-  const actions = VERBS.filter((v) => new RegExp(`\\b${v}`, "i").test(text)).slice(0, 3);
   const amount = text.match(/(?:over|above|more than|exceeding|>)\s*\$\s?([\d,]+(?:\.\d+)?)\s*(k)?/i);
+  // The approval rule applies to the action named in the same sentence as the amount; it goes first.
+  const clause = amount ? text.split(/[.;\n]/).find((c) => c.includes(amount[0])) ?? "" : "";
+  const gated = VERBS.map((v) => [v, verbAt(clause, v)] as const).filter(([, i]) => i >= 0).sort((x, y) => x[1] - y[1])[0]?.[0];
+  const found = VERBS.map((v) => [v, verbAt(text, v)] as const).filter(([, i]) => i >= 0).sort((x, y) => x[1] - y[1]).map(([v]) => v);
+  const actions = [...new Set([...(gated ? [gated] : []), ...found])].slice(0, 3);
   const approvalOverCents = amount ? Math.round(Number(amount[1].replace(/,/g, "")) * (amount[2] ? 1000 : 1) * 100) : null;
   const approverRole = ROLE_WORDS.find(([re]) => re.test(request))?.[1] ?? (approvalOverCents ? "ops_lead" : null);
   const entity = (name.trim().split(/\s+/)[0] || "item").toLowerCase().replace(/s$/, "");
