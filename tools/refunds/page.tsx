@@ -1,6 +1,6 @@
 import { listPayments } from "@/adapters/payments";
 import { ActionForm } from "@/components/action-form";
-import { ReasonField, SelectField } from "@/components/fields";
+import { SelectField } from "@/components/fields";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,7 +9,7 @@ import { pendingApprovalFor } from "@/core/approvals";
 import { can } from "@/core/permissions";
 import { getCurrentUser } from "@/core/session";
 import { requestRefundAction } from "./actions";
-import { formatUsd } from "./logic";
+import { formatUsd, REFUND_REASONS } from "./logic";
 
 export default async function RefundsPage() {
   const user = await getCurrentUser();
@@ -36,12 +36,12 @@ export default async function RefundsPage() {
                   label: `${p.id} · ${p.customer} · ${formatUsd(p.amountCents)}`,
                 }))}
               />
-              <ReasonField />
+              <SelectField name="reason" label="Reason" options={REFUND_REASONS.map((r) => ({ value: r, label: r }))} />
               <Button type="submit">Request refund</Button>
             </ActionForm>
             <p className="mt-3 text-xs text-muted-foreground">
-              Up to $500 completes immediately. Above $500 needs approval from an ops lead other
-              than the requester.
+              Up to $500 completes immediately, until an analyst has refunded $2,000 today. Everything
+              else needs approval from an ops lead other than the requester.
             </p>
           </CardContent>
         </Card>

@@ -12,6 +12,8 @@ export type Payment = Row & {
   status: "settled" | "refunded";
   refundId?: string;
   refundReason?: string;
+  refundedBy?: string;
+  refundedOn?: string;
 };
 
 export function listPayments(): Payment[] {

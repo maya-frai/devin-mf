@@ -3,7 +3,7 @@ import { getPayment } from "@/adapters/payments";
 import { listApprovals } from "@/core/approvals";
 import { resetStore } from "@/core/store";
 import { getUser } from "@/core/users";
-import { requestRefund } from "@/tools/refunds/logic";
+import { refundedToday, requestRefund } from "@/tools/refunds/logic";
 
 const ana = getUser("ana")!;
 
@@ -23,4 +23,13 @@ test("$500.01 needs an ops lead's approval", async () => {
   expect(result.status).toBe("pending_approval");
   expect(getPayment("pay_1006").status).toBe("settled");
   expect(listApprovals()[0]).toMatchObject({ permission: "refunds.approve", requestedBy: "ana" });
+});
+
+test("an analyst's instant refunds stop at $2,000 a day", async () => {
+  for (const id of ["pay_1005", "pay_1016", "pay_1021", "pay_1010", "pay_1024"]) {
+    expect((await requestRefund(ana, id, "Customer request")).status).toBe("refunded");
+  }
+  expect(refundedToday(ana)).toBe(188_500);
+  const result = await requestRefund(ana, "pay_1015", "Customer request"); // $187.50 would make $2,072.50
+  expect(result).toMatchObject({ status: "pending_approval", overDailyLimit: true });
 });

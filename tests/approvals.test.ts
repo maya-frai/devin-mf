@@ -9,7 +9,7 @@ const luis = getUser("luis")!;
 beforeEach(resetStore);
 
 test("self-approval is blocked", async () => {
-  const result = await requestRefund(luis, "pay_1003", "Customer dispute"); // $899.00
+  const result = await requestRefund(luis, "pay_1003", "Customer request"); // $899.00
   expect(result.status).toBe("pending_approval");
   if (result.status !== "pending_approval") return;
 

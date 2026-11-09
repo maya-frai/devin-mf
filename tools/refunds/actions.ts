@@ -12,7 +12,9 @@ export async function requestRefundAction(_: FormState, form: FormData): Promise
     revalidatePath("/", "layout");
     return result.status === "refunded"
       ? { message: `Refunded instantly (${result.refundId}).` }
-      : { message: "Over $500, so it went to an ops lead for approval." };
+      : result.overDailyLimit
+        ? { message: "Over your $2,000 daily limit, so it went to an ops lead for approval." }
+        : { message: "Over $500, so it went to an ops lead for approval." };
   } catch (e) {
     return { error: (e as Error).message };
   }
