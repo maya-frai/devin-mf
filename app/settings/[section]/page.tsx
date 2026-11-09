@@ -22,8 +22,9 @@ export default async function SettingsPage(props: PageProps<"/settings/[section]
 
   return (
     <div>
-      <PageTitle title={terms.settings} subtitle="What this app and Devin use on your behalf, and how it's controlled. Everything here is in your repo." user={user} />
+      <PageTitle title={terms.settings} subtitle="What this app and Devin use on your behalf, and how it's controlled. Everything here is in your repo." />
       <nav className="mb-6 flex gap-6 border-b text-sm">
+        <Link href="/settings" className={tab(false)}>Overview</Link>
         {sections.map((s) => <Link key={s} href={`/settings/${s}`} className={tab(s === section)}>{terms[s]}</Link>)}
       </nav>
       <Section user={user} />

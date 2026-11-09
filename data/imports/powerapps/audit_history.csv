@@ -1,9 +1,9 @@
 auditid,createdon,userid,cr4f2_securityrole,objecttypecode,operation,objectid,changedata_before,changedata_after,cr4f2_reason
-aud_0001,2026-11-09T20:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.rejected,kyc_cases/kyc_2024,"{""status"": ""open""}","{""status"": ""rejected""}",Document mismatch
-aud_0002,2026-11-09T19:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2024,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
-aud_0003,2026-11-09T16:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.pending_second_review,kyc_cases/kyc_2017,"{""status"": ""open""}","{""status"": ""pending_second_review""}",Watchlist match confirmed
-aud_0004,2026-11-09T14:40:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2002,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
-aud_0005,2026-11-09T04:40:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2001,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0001,2026-11-09T20:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.rejected,kyc_cases/kyc_2024,"{""status"": ""open""}","{""status"": ""rejected""}",Document mismatch
+aud_0002,2026-11-09T19:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2024,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
+aud_0003,2026-11-09T16:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.pending_second_review,kyc_cases/kyc_2017,"{""status"": ""open""}","{""status"": ""pending_second_review""}",Watchlist match confirmed
+aud_0004,2026-11-09T14:40:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2002,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
+aud_0005,2026-11-09T04:40:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2001,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
 aud_0006,2026-11-08T22:33:48Z,Luis,Ops Lead - Refunds,cr4f2_payment,approval.approved,payments/pay_1047,"{""status"": ""pending""}","{""status"": ""approved""}",Verified with customer
 aud_0007,2026-11-08T22:33:48Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.issued,payments/pay_1047,"{""refundedCents"": 0}","{""refundedCents"": 60505}",Customer request
 aud_0008,2026-11-08T20:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1180,,"{""refund"": ""rf_023"", ""amountCents"": 4727}",Customer request
@@ -11,17 +11,17 @@ aud_0009,2026-11-08T20:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.is
 aud_0010,2026-11-08T20:00:00Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.requested,payments/pay_1047,,"{""refund"": ""rf_038"", ""amountCents"": 60505}",Customer request
 aud_0011,2026-11-08T19:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1032,,"{""refund"": ""rf_045"", ""amountCents"": 69699}",Service issue
 aud_0012,2026-11-08T19:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_06/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
-aud_0013,2026-11-08T15:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.rejected,kyc_cases/kyc_2023,"{""status"": ""open""}","{""status"": ""rejected""}",Document mismatch
-aud_0014,2026-11-08T14:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2023,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
-aud_0015,2026-11-08T13:40:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2004,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
-aud_0016,2026-11-08T10:40:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2003,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0013,2026-11-08T15:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.rejected,kyc_cases/kyc_2023,"{""status"": ""open""}","{""status"": ""rejected""}",Document mismatch
+aud_0014,2026-11-08T14:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2023,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
+aud_0015,2026-11-08T13:40:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2004,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
+aud_0016,2026-11-08T10:40:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2003,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
 aud_0017,2026-11-08T09:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_06/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
 aud_0018,2026-11-08T06:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_14/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
 aud_0019,2026-11-08T03:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_07/prod,"{""prod"": false}","{""prod"": true}",Approved prod release
 aud_0020,2026-11-07T21:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1034,,"{""refund"": ""rf_046"", ""amountCents"": 110984}",Customer request
 aud_0021,2026-11-07T20:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_14/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
-aud_0022,2026-11-07T19:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2020,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
-aud_0023,2026-11-07T18:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2020,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0022,2026-11-07T19:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2020,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
+aud_0023,2026-11-07T18:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2020,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
 aud_0024,2026-11-07T17:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_07/staging,"{""staging"": false}","{""staging"": true}",Rollout plan step
 aud_0025,2026-11-07T13:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_06/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
 aud_0026,2026-11-07T11:17:20Z,Luis,Ops Lead - Refunds,cr4f2_payment,refunds.rejected,payments/pay_1124,"{""status"": ""pending_approval""}","{""status"": ""rejected""}",Outside refund policy
@@ -32,11 +32,11 @@ aud_0030,2026-11-06T23:56:25Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.re
 aud_0031,2026-11-06T21:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_07/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
 aud_0032,2026-11-06T18:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1036,,"{""refund"": ""rf_048"", ""amountCents"": 50175}",Service issue
 aud_0033,2026-11-06T16:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1035,,"{""refund"": ""rf_047"", ""amountCents"": 87986}",Customer request
-aud_0034,2026-11-06T13:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2021,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
-aud_0035,2026-11-06T13:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2022,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
+aud_0034,2026-11-06T13:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2021,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
+aud_0035,2026-11-06T13:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2022,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
 aud_0036,2026-11-06T13:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_04/prod,"{""prod"": false}","{""prod"": true}",Approved prod release
-aud_0037,2026-11-06T12:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2021,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
-aud_0038,2026-11-06T12:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2022,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0037,2026-11-06T12:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2021,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
+aud_0038,2026-11-06T12:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2022,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
 aud_0039,2026-11-06T12:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_08/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
 aud_0040,2026-11-06T10:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_03/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
 aud_0041,2026-11-06T06:24:32Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1134,,"{""refund"": ""rf_015"", ""amountCents"": 3014}",Customer request
@@ -53,14 +53,14 @@ aud_0051,2026-11-05T06:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.c
 aud_0052,2026-11-05T04:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_03/dev,"{""dev"": false}","{""dev"": true}",Rollout plan step
 aud_0053,2026-11-05T00:34:14Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1247,,"{""refund"": ""rf_017"", ""amountCents"": 14606}",Duplicate charge
 aud_0054,2026-11-05T00:34:14Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1247,"{""refundedCents"": 0}","{""refundedCents"": 14606}",Duplicate charge
-aud_0055,2026-11-04T21:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2018,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
-aud_0056,2026-11-04T21:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2019,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
-aud_0057,2026-11-04T21:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.rejected,kyc_cases/kyc_2025,"{""status"": ""open""}","{""status"": ""rejected""}",Document mismatch
+aud_0055,2026-11-04T21:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2018,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
+aud_0056,2026-11-04T21:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.approved,kyc_cases/kyc_2019,"{""status"": ""open""}","{""status"": ""approved""}",Documents verified
+aud_0057,2026-11-04T21:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.rejected,kyc_cases/kyc_2025,"{""status"": ""open""}","{""status"": ""rejected""}",Document mismatch
 aud_0058,2026-11-04T20:27:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.requested,payments/pay_1090,,"{""refund"": ""rf_006"", ""amountCents"": 10894}",Customer request
 aud_0059,2026-11-04T20:27:00Z,Ana,Ops Analyst - Refunds,cr4f2_payment,refunds.issued,payments/pay_1090,"{""refundedCents"": 0}","{""refundedCents"": 10894}",Customer request
-aud_0060,2026-11-04T20:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2018,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
-aud_0061,2026-11-04T20:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2019,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
-aud_0062,2026-11-04T20:00:00Z,Kim,KYC Reviewer,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2025,"{""assignee"": null}","{""assignee"": ""kim""}",Claim next (highest risk)
+aud_0060,2026-11-04T20:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2018,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
+aud_0061,2026-11-04T20:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2019,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
+aud_0062,2026-11-04T20:00:00Z,Ana,Ops Analyst - Refunds,cr4f2_kyccase,kyc.claimed,kyc_cases/kyc_2025,"{""assignee"": null}","{""assignee"": ""ana""}",Claim next (highest risk)
 aud_0063,2026-11-04T19:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_05/prod,"{""prod"": true}","{""prod"": false}",Approved prod release
 aud_0064,2026-11-04T09:00:00Z,Eli,System Administrator,cr4f2_featureflag,flags.changed,flags/flag_05/staging,"{""staging"": true}","{""staging"": false}",Rollout plan step
 aud_0065,2026-11-04T06:00:00Z,Luis,Ops Lead - Refunds,cr4f2_featureflag,flags.changed,flags/flag_13/prod,"{""prod"": false}","{""prod"": true}",Approved prod release

@@ -23,7 +23,7 @@ Open http://localhost:3000. Requires Node 20+ and pnpm (`corepack enable`). Test
 | Dataverse auditing        | `logAudit()` + Audit Log page                          | `core/audit.ts`, `/audit`           |
 | Power Automate approvals  | `requestApproval()` / `approve()` + Approvals inbox    | `core/approvals.ts`, `/approvals`   |
 | Connectors                | Small mock adapters (payments with idempotency keys, KYC vendor) | `adapters/`             |
-| Field-level security      | SSN to last 4, DOB to year; Reveal only for kyc_reviewer, audited | `core/pii.ts`            |
+| Field-level security      | SSN to last 4, DOB to year; Reveal only for ops_analyst (who reviews KYC), audited | `core/pii.ts`            |
 | Model-driven views, charts | Shared widgets composed by per-role view configs      | `components/widgets/`, `config/views/` |
 | Governance / admin center | Repo conventions + the ADD_TOOL playbook               | `AGENTS.md`, `docs/ADD_TOOL.md`     |
 
@@ -34,14 +34,14 @@ Switch user in the header. Each role lands on its own page and sees its own view
 
 | User  | Role           | Sees / can do                                                                 |
 | ----- | -------------- | ----------------------------------------------------------------------------- |
-| Ana   | `ops_analyst`  | Refunds work view (request first), ledger, read-only KYC status lookup        |
+| Ana   | `ops_analyst`  | Business operations: refunds (request first) and the KYC queue, Reveal SSN/DOB (audited) |
 | Luis  | `ops_lead`     | Approvals first; refunds, KYC team view (+ auditor CSV), plain-language flags; second KYC reviewer |
-| Kim   | `kyc_reviewer` | KYC queue by SLA and risk, Claim next, case page, Reveal SSN/DOB (audited)    |
+| Priya | `product_manager` | Flags in plain English, refund trends and KYC status (read-only, no PII)   |
 | Eli   | `eng_admin`    | Full flags view, brand switcher, Customize page, New tool                     |
-| Farah | `finance`      | Refunds dashboard: KPIs, charts, monthly summary for accounting               |
+| Farah | `finance`      | Finance analyst: refunds dashboard (read-only), ledger adjustments, audit log |
 
 A short script: as Ana, refund pay_1005 ($500, instant) and pay_1006 ($500.01, needs approval).
-As Luis, approve it in Approvals. As Kim, claim the next case, reveal an SSN and reject a high-risk
+As Luis, approve it in Approvals. As Ana, claim the next case, reveal an SSN and reject a high-risk
 case (goes to Luis). As Eli, request a prod flag change and switch the brand to "Ledgerline (alt)".
 As Farah, open Refunds. Finish on the Audit Log as Luis.
 

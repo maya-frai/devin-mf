@@ -10,9 +10,9 @@ import { BuildFlow } from "./build-flow";
 type Suggestion = { mode: "new" | "customize"; tool?: string; text: string; name?: string };
 const field = "rounded-lg border bg-background px-3 text-sm font-normal";
 
-export function BuildForm(props: { ctx: BuildContext; suggestions: Suggestion[]; initialMode: "new" | "customize"; initialTool?: string }) {
+export function BuildForm(props: { ctx: BuildContext; suggestions: Suggestion[]; initialMode: "new" | "customize"; initialTool?: string; initialRequest?: string }) {
   const { ctx } = props;
-  const [req, setReq] = useState<BuildRequest>({ mode: props.initialMode, tool: props.initialTool ?? ctx.tools[0]?.slug, name: "", request: "" });
+  const [req, setReq] = useState<BuildRequest>({ mode: props.initialMode, tool: props.initialTool ?? ctx.tools[0]?.slug, name: props.initialMode === "new" && props.initialRequest?.includes(":") ? props.initialRequest.split(":")[0] : "", request: props.initialRequest ?? "" });
   const [done, setDone] = useState<BuildRequest | null>(null);
   const pick = (s: Suggestion) => { setReq({ ...req, mode: s.mode, tool: s.tool ?? req.tool, name: s.name ?? (s.mode === "new" ? s.text.split(":")[0] : ""), request: s.text }); setDone(null); };
 

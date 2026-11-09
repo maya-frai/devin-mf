@@ -12,22 +12,22 @@ export const POLICY: Record<string, Role[]> = {
   "refunds.approve": [WORKFLOWS.refunds.approverRole],
 
   "kyc.view": viewers("kyc"),
-  "kyc.decide": ["kyc_reviewer"],
+  "kyc.decide": ["ops_analyst"],
   "kyc.second_review": [WORKFLOWS.kyc.secondReviewerRole],
   "kyc.export": ["ops_lead"],
-  "pii.reveal": ["kyc_reviewer"],
+  "pii.reveal": ["ops_analyst"],
 
   "flags.view": viewers("flags"),
   "flags.toggle": ["eng_admin"],
   "flags.approve": WORKFLOWS.flags.approverRoles,
 
   "ledger.view": viewers("ledger"),
-  "ledger.adjust": ["ops_analyst", "ops_lead"],
+  "ledger.adjust": ["finance", "ops_lead"],
   "ledger.approve": [WORKFLOWS.ledger.approverRole],
 
-  "audit.view": ["ops_lead", "kyc_reviewer", "eng_admin", "finance"],
-  "tools.create": ["ops_analyst", "ops_lead", "kyc_reviewer", "eng_admin", "finance"],
-  "access.request": ["ops_analyst", "ops_lead", "kyc_reviewer", "eng_admin", "finance"],
+  "audit.view": ["ops_lead", "eng_admin", "finance"],
+  "tools.create": ["ops_analyst", "ops_lead", "product_manager", "eng_admin", "finance"],
+  "access.request": ["ops_analyst", "ops_lead", "product_manager", "eng_admin", "finance"],
   "access.approve": ["eng_admin", "ops_lead"],
   "platform.customize": ["eng_admin"],
   "brand.switch": ["eng_admin"],

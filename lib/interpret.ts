@@ -45,11 +45,16 @@ export function interpretCustomize(tool: string, request: string): Customization
   return { tool, widget: pick.widget, label: pick.label, matched: !!hit };
 }
 
+// One-click ideas for a tool's view, phrased as requests the builder understands.
+export const suggestionsFor = (tool: string): string[] =>
+  CATALOG.filter((c) => c.tool === tool).map((c) => c.label.replace(/^\w+: /, "")).map((t) => t[0].toUpperCase() + t.slice(1));
+
 const VERBS = ["approve", "reject", "escalate", "match", "flag", "clear", "confirm", "resolve", "assign", "close", "review"];
 const ROLE_WORDS: [RegExp, string][] = [
   [/finance|controller|accounting/i, "finance"],
   [/engineer|system owner|admin/i, "eng_admin"],
-  [/second reviewer|kyc|compliance analyst/i, "kyc_reviewer"],
+  [/product manager|\bpm\b/i, "product_manager"],
+  [/business ops|operations analyst/i, "ops_analyst"],
   [/lead|manager|head|supervisor/i, "ops_lead"],
 ];
 

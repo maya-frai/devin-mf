@@ -42,7 +42,7 @@ export default async function BuildPage(props: PageProps<"/build">) {
   return (
     <div>
       <PageTitle title={terms.buildTool} subtitle="Describe it in plain English. Devin uses your role, your tools and the systems behind them." user={user} />
-      <BuildForm ctx={ctx} suggestions={[...role.suggestions, ...ideas]} initialMode={q.mode === "customize" ? "customize" : "new"} initialTool={q.tool} />
+      <BuildForm ctx={ctx} suggestions={[...role.suggestions, ...ideas]} initialMode={q.mode === "customize" ? "customize" : "new"} initialTool={q.tool} initialRequest={q.request} />
     </div>
   );
 }

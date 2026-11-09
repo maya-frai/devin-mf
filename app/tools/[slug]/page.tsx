@@ -6,7 +6,10 @@ import { PlatformView } from "@/components/platform-view";
 import { can } from "@/core/permissions";
 import { DraftToolView } from "@/components/drafts/draft-tool-view";
 import { ImportBanner } from "@/components/import-banner";
-import { getDraft } from "@/core/drafts";
+import { customWidgets, getDraft } from "@/core/drafts";
+import { SuggestChips } from "@/components/suggest-chips";
+import { ROLES } from "@/config/roles";
+import { interpretCustomize, suggestionsFor } from "@/lib/interpret";
 import { Button } from "@/components/ui/button";
 import { getCurrentUser, getTerms, toolName } from "@/core/session";
 import { importCounts, trackOpen } from "@/core/store";
@@ -33,6 +36,11 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
   const tab = (active: boolean) =>
     cn("border-b-2 px-1 pb-2", active ? "border-foreground font-medium" : "border-transparent text-muted-foreground");
   const { Page } = tool;
+  const applied = new Set(customWidgets(user.role, slug).map((c) => c.label));
+  const ideas = [...ROLES[user.role].suggestions.filter((s) => s.mode === "customize" && s.tool === slug).map((s) => s.text), ...suggestionsFor(slug)];
+  const fresh = can(user, "tools.create") && ROLES[user.role].tools[slug]
+    ? [...new Map(ideas.map((t) => [interpretCustomize(slug, t).label, t])).entries()].filter(([label]) => !applied.has(label)).map(([, t]) => t).slice(0, 4)
+    : [];
 
   return (
     <div>
@@ -47,7 +55,7 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
           </Button>
         ) : null}
       </nav>
-      {platform ? <PlatformView tool={tool} /> : <Page query={query} />}
+      {platform ? <PlatformView tool={tool} /> : <><SuggestChips tool={slug} items={fresh} /><Page query={query} /></>}
     </div>
   );
 }

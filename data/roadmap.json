@@ -32,7 +32,7 @@
       "Adapter"
     ],
     "roles": [
-      "kyc_reviewer",
+      "ops_analyst",
       "ops_lead"
     ]
   },
@@ -50,7 +50,7 @@
       "Adapter"
     ],
     "roles": [
-      "kyc_reviewer",
+      "ops_analyst",
       "ops_lead"
     ]
   },
@@ -68,8 +68,8 @@
     ],
     "roles": [
       "ops_analyst",
-      "kyc_reviewer",
-      "ops_lead"
+      "ops_lead",
+      "product_manager"
     ]
   },
   {
@@ -104,8 +104,9 @@
       "Adapter"
     ],
     "roles": [
-      "kyc_reviewer",
-      "ops_lead"
+      "ops_analyst",
+      "ops_lead",
+      "product_manager"
     ]
   },
   {
@@ -120,7 +121,8 @@
       "Approvals"
     ],
     "roles": [
-      "eng_admin"
+      "eng_admin",
+      "product_manager"
     ]
   },
   {

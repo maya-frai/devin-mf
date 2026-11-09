@@ -27,7 +27,7 @@ export const WORKFLOWS = {
   powerAppsRoles: {
     "Ops Analyst - Refunds": "ops_analyst",
     "Ops Lead - Refunds": "ops_lead",
-    "KYC Reviewer": "kyc_reviewer",
+    "Product Manager": "product_manager",
     "System Administrator": "eng_admin",
     "Finance - Read Only": "finance",
   } as Record<string, Role>,
